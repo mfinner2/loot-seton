@@ -1,9 +1,11 @@
-import React from "react"
+import Home from "./Home/Home.jsx"
 
-export default function Components () {
+const Components = () => {
     return (
         <div>
-            Hello from Components
+            <Home />
         </div>
     )
 }
+
+export default Components;

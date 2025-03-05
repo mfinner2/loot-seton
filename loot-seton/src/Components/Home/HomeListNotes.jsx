@@ -6,7 +6,6 @@ import {
 const HomeListNotes = () => {
     const [notes, setNotes] = useState([]);
 
-      //I used the internet to help me write this
       // Add comments later
     useEffect(() => {
         getNotes().then((notes) => {
@@ -16,7 +15,6 @@ const HomeListNotes = () => {
 
     return (
         <div>
-            This is Home List
             <div>
                 <ul>
                     {notes.map((item, user) => (

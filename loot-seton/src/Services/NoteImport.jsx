@@ -33,7 +33,7 @@ export const createNote = (folderName, noteContent) => {
 }
 
 // Delete a Note, Must have id of note
-export const deleteNote = (id) => {
+export const deleteNote = async (id) => {
     const Note = Parse.Object.extend("Notes");
     const query = new Parse.Query(Note);
     return query.get(id).then((note) => {

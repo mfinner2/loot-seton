@@ -1,9 +1,9 @@
-function Components () {
+import React from "react"
+
+export default function Components () {
     return (
         <div>
             Hello from Components
         </div>
     )
 }
-
-export default Components

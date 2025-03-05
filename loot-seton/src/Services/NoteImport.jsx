@@ -16,3 +16,25 @@ export const getNotes = async () => {
         return []; 
       }
 };
+
+// Create a note, will need the folder it is going to
+export const createNote = (folderName, noteContent) => {
+    const Note = Parse.Object.extend("Notes");
+    const note = new Note();
+
+    note.set("note", noteContent);
+    note.set("folder", folderName)
+
+    return note.save().then((result) => {
+        return result;
+    })
+}
+
+// Delete a Note, Must have id of note
+export const deleteNote = (id) => {
+    const Note = Parse.Object.extend("Notes");
+    const query = new Parse.Query(Note);
+    return query.get(id).then((note) => {
+        note.destroy();
+    })
+}

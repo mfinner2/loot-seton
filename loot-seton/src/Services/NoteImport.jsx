@@ -11,6 +11,7 @@ export const getNotes = async () => {
           user: item.get("user"),
           note: item.get("note"),
           folder: item.get("folder"),
+          id: item.get("objectId")
         }));
       } catch (error) {
         console.error("Error fetching data:", error.message);

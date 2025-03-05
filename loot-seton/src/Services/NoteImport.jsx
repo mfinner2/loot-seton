@@ -1,4 +1,5 @@
 import Parse from 'parse'
+// All Things done with Parse
 
 // Get All Notes
 export const getNotes = async () => {
@@ -38,3 +39,20 @@ export const deleteNote = (id) => {
         note.destroy();
     })
 }
+
+// Edit a specific note
+export const editNote = async (id, newNote) => {
+    try {
+    const Note = Parse.Object.extend("Notes");
+    const query = new Parse.Query(Note);
+
+    const note = await query.get(id)
+    note.set("note", newNote);
+    await note.save();
+
+    return {success: true, message: "Note was Changed"};
+    }  catch (error) {
+        console.error("Error updating note:", error.message);
+        return { success: false, message: error.message };
+    }
+};

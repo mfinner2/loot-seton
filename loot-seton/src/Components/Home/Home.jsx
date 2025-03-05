@@ -1,6 +1,10 @@
+import HomeListNotes from "./HomeListNotes.jsx";
+
 const Home = () => {
     return (
-        <div>This is home</div>
+        <div>This is home
+            <HomeListNotes />
+        </div>
     )
 }
 

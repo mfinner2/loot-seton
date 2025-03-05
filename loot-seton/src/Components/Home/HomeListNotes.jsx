@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import Parse from 'parse'
 import {
-    getNotesByUser,
+    getNotes,
 } from "../../Services/NoteImport.jsx"
 
 const HomeListNotes = () => {
@@ -10,22 +9,9 @@ const HomeListNotes = () => {
       //I used the internet to help me write this
       // Add comments later
     useEffect(() => {
-      async function fetchItems() {
-        const query = new Parse.Query("Notes");
-        try {
-          const results = await query.find();
-          setNotes(
-            results.map((item) => ({
-              user: item.get("user"),
-              note: item.get("note"),
-              folder: item.get("folder")
-            }))
-          );
-        } catch (error) {
-          console.error("Error fetching data:", error.message);
-        }
-      }
-      fetchItems();
+        getNotes().then((notes) => {
+            setNotes(notes)
+        })
     });
 
     return (

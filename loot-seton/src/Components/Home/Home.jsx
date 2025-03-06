@@ -1,4 +1,5 @@
 import HomeListNotes from "./HomeListNotes.jsx";
+import HomeDropDown from "./HomeDropDown.jsx";
 import { useState, useEffect } from 'react'
 import {
     getNotes,
@@ -49,6 +50,7 @@ const Home = () => {
     }
 
     const onSelectHandler = (folder) => {
+        //alert(folder)
         setSelectedFolder(folder)
         console.log("selected: ", selectedFolder)
     }
@@ -57,7 +59,8 @@ const Home = () => {
     // Homelist notes Waits for a selected folder
     return (
         <div>
-            <HomeListNotes notes={notes}/>
+            <HomeDropDown folders={folders} onSelect={onSelectHandler} />
+            <HomeListNotes notes={notes} folder={selectedFolder}/>
         </div>
     )
 }

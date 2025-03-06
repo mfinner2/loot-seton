@@ -1,21 +1,22 @@
 // THIS IS NOT BEING USED AT THE MOMENT
 
-// const HomeDropDown = ({folders, onSelect}) => {
-    // const handleChange = (e) => {
-        // onSelect(e.target.value)
-    // }
-// 
-// 
-    // return (
-        // <select onChange={handleChange}>
-            {/* <option value="">Select a Folder</option> */}
-                {/* {folders.map((folder, index) => ( */}
-                    // <option key={index} value={folder.name}>
-                        {/* {folder.name} */}
-            {/* </option> */}
-    //   ))}
-        {/* </select> */}
-    // )
-// }
-// 
-// export default HomeDropDown
+ const HomeDropDown = ({folders, onSelect}) => {
+     const handleChange = (e) => {
+        //alert(e.target.value)
+         onSelect(e.target.value)
+     }
+         console.log("Folders: " + folders);
+ //value="" onChange={onSelect}
+     return (
+        <div>
+            <select onChange={(event) => handleChange(event)}>
+            <option key="" value="">Select a folder</option>
+                {folders.map((folder) => (
+                        <option key={folder} value={folder.id}>{folder.name}</option>
+                ))}
+            </select>
+        </div>
+     )
+ }
+ 
+ export default HomeDropDown

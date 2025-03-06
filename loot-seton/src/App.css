@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+
+.gap {
+  clear: both;
+}
+
+h1 {
+  text-decoration: underline;
+  transform: rotateY(180deg);
+  /*float: left;*/
+}

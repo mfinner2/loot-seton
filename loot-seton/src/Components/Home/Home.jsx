@@ -59,6 +59,10 @@ const Home = () => {
     // Homelist notes Waits for a selected folder
     return (
         <div>
+            <div class="title">
+                <h1>noteS tooL</h1>
+            </div>
+            <div class="gap" />
             <HomeDropDown folders={folders} onSelect={onSelectHandler} />
             <HomeListNotes notes={notes} folder={selectedFolder}/>
         </div>

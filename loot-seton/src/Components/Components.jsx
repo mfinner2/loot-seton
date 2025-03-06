@@ -5,13 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 const Components = () => {
-/*    return (
-        <div>
-            <Nav />
-            <Home />
-            <NewNote />
-        </div>
-    )*/
+    //set up routing
    return (
     <Router>
       <Nav />

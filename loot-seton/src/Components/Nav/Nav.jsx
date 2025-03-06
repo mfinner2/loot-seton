@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Nav = () => {
+  //hold links to allow for moving between pages
   return (
     <header>
       <nav>

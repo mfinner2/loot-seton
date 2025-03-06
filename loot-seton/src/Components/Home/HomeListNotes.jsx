@@ -1,4 +1,4 @@
-const HomeListNotes = ({notes}) => {
+const HomeListNotes = ({notes, folder}) => {
     //display all notes in a list
     return (
         <div>

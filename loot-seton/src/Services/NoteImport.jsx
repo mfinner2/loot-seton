@@ -1,4 +1,5 @@
 import Parse from 'parse'
+import { getOrCreateFolder } from './FolderImport.jsx'
 // All Things done with Parse
 
 // Get All Notes
@@ -18,26 +19,6 @@ export const getNotes = async () => {
         return []; 
       }
 };
-
-// Get or create folder based on the note
-export const getOrCreateFolder = async (folderName) => {
-    const Folder = Parse.Object.extend("Folder");
-    const query = new Parse.Query(Folder);
-    query.equalTo("name", folderName)
-
-    try {
-        let folder = await query.first();
-        if (!folder) {
-          folder = new Folder();
-          folder.set("name", folderName);
-          await folder.save();
-        }
-        return folder;
-      } catch (error) {
-        console.error("Error getting/creating folder:", error);
-      }
-};
-
 
 // Create a note, will need the folder it is going to
 export const createNote = async (folderName, noteContent) => {

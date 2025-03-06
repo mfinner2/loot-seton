@@ -8,8 +8,8 @@ import Components from './Components/Components.jsx'
 
 // This is what prof said to do in class
 const Env = {
-  APPLICATION_ID: "xoTsVwFrXmRHInrchvIqY9ajBpF3n5zunJepf5eH",
-  JAVASCRIPT_KEY: "hjWiI6LQh6RkwV3YS1V6sIdr87ev1SXmCI9oxkq5",
+  APPLICATION_ID: "IQNjmOWmb0mI8XYYJHmvuHl40vgns95GDMBLCDe7",
+  JAVASCRIPT_KEY: "U5mqLSIMIVzCxYLRptCxskgdtVCzhiz6y91kBnVZ",
   SERVER_URL: "https://parseapi.back4app.com",
 }
 

@@ -1,17 +1,20 @@
 import Parse from 'parse'
+import { getOrCreateFolder } from './FolderImport.jsx'
 // All Things done with Parse
 
 // Get All Notes
 export const getNotes = async () => {
     try {
         const query = new Parse.Query("Notes");
+        // turns the pointer into the actual object
+        query.include("folder")
         const results = await query.find();
         
         return results.map((item) => ({
           user: item.get("user"),
           note: item.get("note"),
           folder: item.get("folder"),
-          id: item.get("objectId")
+          id: item.id || item.get("objectId")
         }));
       } catch (error) {
         console.error("Error fetching data:", error.message);
@@ -20,12 +23,17 @@ export const getNotes = async () => {
 };
 
 // Create a note, will need the folder it is going to
-export const createNote = (folderName, noteContent) => {
+export const createNote = async (folderName, noteContent) => {
     const Note = Parse.Object.extend("Notes");
     const note = new Note();
+    const folder = await getOrCreateFolder(folderName)
+    // const folderPointer = Parse.Object.createWithoutData(folder.id, "Folder")
+    // console.log("folderpointer in createnote: ", folderPointer)
+
+    // console.log("folder in parse: ", folder)
 
     note.set("note", noteContent);
-    note.set("folder", folderName)
+    note.set("folder", folder)
 
     return note.save().then((result) => {
         return result;

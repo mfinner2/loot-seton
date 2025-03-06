@@ -3,8 +3,27 @@ import {
     deleteNote,
 } from "../../Services/NoteImport.jsx"
 
-const HomeListNotes = ({notes, del}) => {
+
+const HomeListNotes = () => {
+    const [notes, setNotes] = useState([]);
+    const [remove, setRemove] = useState("");
+
+      // Add comments later
+    useEffect(() => {
+        getNotes().then((notes) => {
+            setNotes(notes)
+        })
+        
+    });
     
+
+    useEffect(() => {
+        if (remove.length > 0) {
+            deleteNote(remove).then(() => {
+                console.log("Removed: ", remove)
+            })
+        }
+    }, [remove])
 
     return (
         <div>
@@ -13,7 +32,7 @@ const HomeListNotes = ({notes, del}) => {
                     <span>
                         <li key={note}>{note.note}</li>
                         <button onClick={(e) => {
-                            deleteNote(note.id)
+                            setRemove(note.id);
                         }}>Delete</button>
                     </span>
                 ))}

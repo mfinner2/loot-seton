@@ -19,13 +19,34 @@ export const getNotes = async () => {
       }
 };
 
+// Get or create folder based on the note
+export const getOrCreateFolder = async (folderName) => {
+    const Folder = Parse.Object.extend("Folder");
+    const query = new Parse.Query(Folder);
+    query.equalTo("name", folderName)
+
+    try {
+        let folder = await query.first();
+        if (!folder) {
+          folder = new Folder();
+          folder.set("name", folderName);
+          await folder.save();
+        }
+        return folder;
+      } catch (error) {
+        console.error("Error getting/creating folder:", error);
+      }
+};
+
+
 // Create a note, will need the folder it is going to
-export const createNote = (folderName, noteContent) => {
+export const createNote = async (folderName, noteContent) => {
     const Note = Parse.Object.extend("Notes");
     const note = new Note();
+    const folder = await getOrCreateFolder(folderName)
 
     note.set("note", noteContent);
-    note.set("folder", folderName)
+    note.set("folder", folder)
 
     return note.save().then((result) => {
         return result;

@@ -24,15 +24,15 @@ const Home = () => {
             // setFolders(uniqueFolders)
             // console.log("folders: ", uniqueFolders)
         })
-    });
+    }, []);
 
-    // gets the folders
-    // useEffect(() => {
-        // getFolders().then((folders) => {
-            // setFolders(folders)
-            // console.log("stuff: ", folders)
-        // })
-    // })
+    //gets the folders
+    useEffect(() => {
+        getFolders().then((folders) => {
+            setFolders(folders)
+            console.log("folders in home: ", folders)
+        })
+    }, [])
 
     //trying to delete (not currently functional)
     useEffect(() => {

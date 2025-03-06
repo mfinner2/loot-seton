@@ -1,6 +1,9 @@
 import Parse from 'parse'
 // All folder functions using parse
 
+export let Folders = {};
+Folders.collection = [];
+
 // Get All Folders
 export const getFolders = async () => {
     try {

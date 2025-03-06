@@ -2,7 +2,7 @@ import HomeListNotes from "./HomeListNotes.jsx";
 
 const Home = () => {
     return (
-        <div>This is home
+        <div>
             <HomeListNotes />
         </div>
     )

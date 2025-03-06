@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import {
     getNotes,
+    deleteNote,
 } from "../../Services/NoteImport.jsx"
 
 const HomeListNotes = () => {
@@ -15,13 +16,16 @@ const HomeListNotes = () => {
 
     return (
         <div>
-            <div>
-                <ul>
-                    {notes.map((item, user) => (
-                        <li key={user}>{item.note}</li>
-                    ))}
-                </ul>
-            </div>
+            <ul>
+                {notes.map((note) => (
+                    <span>
+                        <li key={note.id}>{note.note}</li>
+                        <button onClick={(e) => {
+                            deleteNote(item.id)
+                        }}>Delete</button>
+                    </span>
+                ))}
+            </ul>
         </div>
     )
 }

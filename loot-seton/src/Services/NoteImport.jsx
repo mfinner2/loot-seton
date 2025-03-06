@@ -2,6 +2,9 @@ import Parse from 'parse'
 import { getOrCreateFolder } from './FolderImport.jsx'
 // All Things done with Parse
 
+export let Notes = {};
+Notes.collection = [];
+
 // Get All Notes
 export const getNotes = async () => {
     try {

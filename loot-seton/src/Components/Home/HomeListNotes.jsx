@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
 import {
     getNotes,
     deleteNote,
 } from "../../Services/NoteImport.jsx"
+
 
 const HomeListNotes = () => {
     const [notes, setNotes] = useState([]);
@@ -15,6 +15,7 @@ const HomeListNotes = () => {
         })
         
     });
+    
 
     useEffect(() => {
         if (remove.length > 0) {
@@ -29,7 +30,7 @@ const HomeListNotes = () => {
             <ul>
                 {notes.map((note) => (
                     <span>
-                        <li key={note.id}>{note.note}</li>
+                        <li key={note}>{note.note}</li>
                         <button onClick={(e) => {
                             setRemove(note.id);
                         }}>Delete</button>

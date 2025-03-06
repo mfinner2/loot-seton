@@ -7,7 +7,7 @@ import {
 
 const Home = () => {
     const [notes, setNotes] = useState([]);
-    const [remove, setRemove] = useState("");
+    const [remove, setRemove] = useState(false);
 
       // Add comments later
     useEffect(() => {
@@ -24,9 +24,14 @@ const Home = () => {
         }
     }, [remove])
 
+    const onClickHandler = (e) => {
+        e.preventDefault();
+        setRemove(true);
+    }
+
     return (
         <div>
-            <HomeListNotes notes={notes} remove={remove} setRemove={setRemove}/>
+            <HomeListNotes notes={notes} onClick={onClickHandler}/>
         </div>
     )
 }

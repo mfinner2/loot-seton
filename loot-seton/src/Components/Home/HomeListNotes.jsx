@@ -1,27 +1,19 @@
-import { useState, useEffect } from 'react'
 import {
     getNotes,
     deleteNote,
 } from "../../Services/NoteImport.jsx"
 
-const HomeListNotes = () => {
-    const [notes, setNotes] = useState([]);
-
-      // Add comments later
-    useEffect(() => {
-        getNotes().then((notes) => {
-            setNotes(notes)
-        })
-    });
+const HomeListNotes = ({notes, del}) => {
+    
 
     return (
         <div>
             <ul>
                 {notes.map((note) => (
                     <span>
-                        <li key={note.id}>{note.note}</li>
+                        <li key={note}>{note.note}</li>
                         <button onClick={(e) => {
-                            deleteNote(item.id)
+                            deleteNote(note.id)
                         }}>Delete</button>
                     </span>
                 ))}

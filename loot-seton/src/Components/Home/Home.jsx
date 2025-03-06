@@ -9,13 +9,13 @@ const Home = () => {
     const [notes, setNotes] = useState([]);
     const [remove, setRemove] = useState(false);
 
-      // Add comments later
+      // Get notes
     useEffect(() => {
         getNotes().then((notes) => {
             setNotes(notes)
         })
     });
-
+    //trying to delete (not currently functional)
     useEffect(() => {
         if (remove.length > 0) {
             deleteNote(remove).then(() => {
@@ -23,7 +23,7 @@ const Home = () => {
             })
         }
     }, [remove])
-
+    //also trying to delete
     const onClickHandler = (e) => {
         e.preventDefault();
         setRemove(true);

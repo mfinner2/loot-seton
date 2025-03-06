@@ -1,4 +1,5 @@
 const HomeListNotes = ({notes}) => {
+    //display all notes in a list
     return (
         <div>
             <ul>

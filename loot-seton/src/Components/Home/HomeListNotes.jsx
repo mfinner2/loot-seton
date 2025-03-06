@@ -9,10 +9,10 @@ const HomeListNotes = ({notes, folder}) => {
 
     return (
         <div>
-            <ul>
+            <ul class="stickyNote">
                 {filteredNotes.map((note) => (
                     <span>
-                        <li key={note}>{note.note} is in {note.folder.id}. {note.folder.id} is a pointer to the folder</li>
+                        <li key={note.id}>{note.note}</li>
                     </span>
                 ))}
             </ul>

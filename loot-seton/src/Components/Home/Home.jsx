@@ -19,10 +19,20 @@ const Home = () => {
     useEffect(() => {
         getNotes().then((notes) => {
             setNotes(notes)
-            const uniqueFolders = [...new Set(notes.map((item) => item.folder))]
-            setFolders(uniqueFolders)
+            console.log("notes: ", notes)
+            // const uniqueFolders = [...new Set(notes.map((item) => item.folder))]
+            // setFolders(uniqueFolders)
+            // console.log("folders: ", uniqueFolders)
         })
     });
+
+    // gets the folders
+    useEffect(() => {
+        getFolders().then((folders) => {
+            setFolders(folders)
+            console.log("stuff: ", folders)
+        })
+    })
 
     //trying to delete (not currently functional)
     useEffect(() => {
@@ -32,7 +42,7 @@ const Home = () => {
             })
         }
     }, [remove])
-    //also trying to delete
+    //also trying to delete (not currently functional)
     const onClickHandler = (e) => {
         e.preventDefault();
         setRemove(true);
@@ -40,12 +50,19 @@ const Home = () => {
 
     const onSelectHandler = (folder) => {
         setSelectedFolder(folder)
+        console.log("selected: ", selectedFolder)
     }
+    console.log("selected: ", selectedFolder)
 
+    // Homelist notes Waits for a selected folder
     return (
         <div>
             <HomeDropDown folders={folders} onSelect={onSelectHandler}/>
-            <HomeListNotes notes={notes} folder={folders}/>
+            {selectedFolder ? (
+                <HomeListNotes notes={notes} folder={selectedFolder} />
+                ) : (
+                <p>Please select a folder to see the notes</p> // Loading or placeholder message
+            )}
         </div>
     )
 }

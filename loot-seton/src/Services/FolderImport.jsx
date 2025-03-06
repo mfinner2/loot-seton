@@ -11,7 +11,7 @@ export const getFolders = async () => {
           user: item.get("user"),
           name: item.get("name"),
           description: item.get("description"),
-          id: item.get("objectId")
+          id: item.id || item.get("objectId")
         }));
       } catch (error) {
         console.error("Error fetching data:", error.message);

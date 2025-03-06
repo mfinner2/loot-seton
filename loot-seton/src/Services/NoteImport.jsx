@@ -6,13 +6,15 @@ import { getOrCreateFolder } from './FolderImport.jsx'
 export const getNotes = async () => {
     try {
         const query = new Parse.Query("Notes");
+        // turns the pointer into the actual object
+        query.include("folder")
         const results = await query.find();
         
         return results.map((item) => ({
           user: item.get("user"),
           note: item.get("note"),
           folder: item.get("folder"),
-          id: item.get("objectId")
+          id: item.id || item.get("objectId")
         }));
       } catch (error) {
         console.error("Error fetching data:", error.message);

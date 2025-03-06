@@ -1,7 +1,11 @@
 const HomeDropDown = ({folders, onSelect}) => {
+    const handleChange = (e) => {
+        onSelect(e.target.value)
+    }
+
 
     return (
-        <select onChange={onSelect}>
+        <select onChange={handleChange}>
             <option value="">Select a Folder</option>
                 {folders.map((folder, index) => (
                     <option key={index} value={folder.name}>

@@ -33,7 +33,9 @@ export const getOrCreateFolder = async (folderName) => {
           folder.set("name", folderName);
           await folder.save();
         }
-        return folder;
+        console.log("folder id: ", folder.id)
+        //returns folder object
+        return folder
       } catch (error) {
         console.error("Error getting/creating folder:", error);
       }

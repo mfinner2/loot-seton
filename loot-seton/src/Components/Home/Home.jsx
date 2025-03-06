@@ -7,7 +7,7 @@ import {
 import {
     getFolders
 } from "../../Services/FolderImport.jsx"
-import HomeDropDown from "./HomeDropDown.jsx";
+//import HomeDropDown from "./HomeDropDown.jsx";
 
 const Home = () => {
     const [notes, setNotes] = useState([]);
@@ -27,12 +27,12 @@ const Home = () => {
     });
 
     // gets the folders
-    useEffect(() => {
-        getFolders().then((folders) => {
-            setFolders(folders)
-            console.log("stuff: ", folders)
-        })
-    })
+    // useEffect(() => {
+        // getFolders().then((folders) => {
+            // setFolders(folders)
+            // console.log("stuff: ", folders)
+        // })
+    // })
 
     //trying to delete (not currently functional)
     useEffect(() => {
@@ -52,17 +52,12 @@ const Home = () => {
         setSelectedFolder(folder)
         console.log("selected: ", selectedFolder)
     }
-    console.log("selected: ", selectedFolder)
+    console.log("notes in home: ", notes)
 
     // Homelist notes Waits for a selected folder
     return (
         <div>
-            <HomeDropDown folders={folders} onSelect={onSelectHandler}/>
-            {selectedFolder ? (
-                <HomeListNotes notes={notes} folder={selectedFolder} />
-                ) : (
-                <p>Please select a folder to see the notes</p> // Loading or placeholder message
-            )}
+            <HomeListNotes notes={notes}/>
         </div>
     )
 }

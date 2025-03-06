@@ -27,6 +27,10 @@ export const createNote = async (folderName, noteContent) => {
     const Note = Parse.Object.extend("Notes");
     const note = new Note();
     const folder = await getOrCreateFolder(folderName)
+    // const folderPointer = Parse.Object.createWithoutData(folder.id, "Folder")
+    // console.log("folderpointer in createnote: ", folderPointer)
+
+    // console.log("folder in parse: ", folder)
 
     note.set("note", noteContent);
     note.set("folder", folder)

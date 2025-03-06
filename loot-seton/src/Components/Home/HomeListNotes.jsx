@@ -4,26 +4,20 @@ import {
 } from "../../Services/NoteImport.jsx"
 
 
-const HomeListNotes = () => {
-    const [notes, setNotes] = useState([]);
-    const [remove, setRemove] = useState("");
-
-      // Add comments later
-    useEffect(() => {
-        getNotes().then((notes) => {
-            setNotes(notes)
-        })
-        
-    });
+const HomeListNotes = ({notes, remove, setRemove}) => {
+    //const [notes, setNotes] = useState([]);
     
 
-    useEffect(() => {
-        if (remove.length > 0) {
-            deleteNote(remove).then(() => {
-                console.log("Removed: ", remove)
-            })
-        }
-    }, [remove])
+      // Add comments later
+    //useEffect(() => {
+    //    getNotes().then((notes) => {
+    //        setNotes(notes)
+    //   })
+        
+    //});
+    
+
+    
 
     return (
         <div>

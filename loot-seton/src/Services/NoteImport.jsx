@@ -14,7 +14,6 @@ export const getNotes = async () => {
         const results = await query.find();
         
         return results.map((item) => ({
-          user: item.get("user"),
           note: item.get("note"),
           folder: item.get("folder"),
           id: item.id || item.get("objectId")

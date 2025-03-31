@@ -10,9 +10,9 @@
      return (
         <div>
             <select onChange={(event) => handleChange(event)}>
-            <option key="" value="">Select a folder</option>
+            <option value="">Select a folder</option>
                 {folders.map((folder) => (
-                        <option key={folder} value={folder.id}>{folder.name}</option>
+                        <option key={folder.id} value={folder.id}>{folder.name}</option>
                 ))}
             </select>
         </div>

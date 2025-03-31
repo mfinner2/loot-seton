@@ -5,14 +5,14 @@ const HomeListNotes = ({notes, folder}) => {
     console.log("folder: ", folder)
     console.log("notes in list ", notes)
     const filteredNotes = notes.filter((note) => note.folder.id === folder);
-   // console.log("filtered notes ", filteredNotes)
+    console.log("filtered notes ", filteredNotes)
 
     return (
         <div>
-            <ul class="stickyNote">
-                {filteredNotes.map((note) => (
+            <ul className="stickyNote">
+                {filteredNotes.map((note, i) => (
                     <span>
-                        <li key={note.id}>{note.note}</li>
+                        <li key={i}>{note.note}</li>
                     </span>
                 ))}
             </ul>

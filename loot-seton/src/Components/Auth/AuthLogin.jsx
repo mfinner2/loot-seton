@@ -23,7 +23,7 @@ const AuthLogin = () => {
           );
         }
         setAdd(false);
-        navigate("/check");
+        navigate("/home");
       });
     }
   }, [newUser, add]);

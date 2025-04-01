@@ -8,6 +8,9 @@ import {
 import {
     getFolders
 } from "../../Services/FolderImport.jsx"
+import Parse from "parse";
+import { useNavigate } from "react-router-dom"
+
 //import HomeDropDown from "./HomeDropDown.jsx";
 
 const Home = () => {
@@ -54,11 +57,19 @@ const Home = () => {
         setSelectedFolder(folder)
         console.log("selected: ", selectedFolder)
     }
+
+    const navigate = useNavigate();
+    const logoutHandler = () => {
+        Parse.User.logOut();
+
+        navigate("/");
+    };
     console.log("notes in home: ", notes)
 
     // Homelist notes Waits for a selected folder
     return (
         <div>
+            <button onClick={logoutHandler}>Log Out</button>
             <div className="title">
                 <h1>noteS tooL</h1>
             </div>

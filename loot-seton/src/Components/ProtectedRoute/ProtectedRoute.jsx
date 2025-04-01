@@ -1,4 +1,5 @@
 import { Navigate, useNavigate } from "react-router-dom";
+import Parse from 'parse'
 
 const ProtectedRoute = ({ element: Component, flag, ...rest }) => {
   const navigate = useNavigate();
@@ -7,13 +8,10 @@ const ProtectedRoute = ({ element: Component, flag, ...rest }) => {
   };
   return (
     <div>
-      {flag ? (
+      {Parse.User.current()?.authenticated ? (
         <Component />
       ) : (
-        <div>
-          <p>Unauthorized</p>
-          <button onClick={goBackHandler}>Go Back</button>
-        </div>
+        <Navigate to={"/"} replace />
       )}
     </div>
   );

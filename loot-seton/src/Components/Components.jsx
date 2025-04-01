@@ -4,6 +4,7 @@ import Nav from "./Nav/Nav.jsx"
 import AuthModule from "./Auth/Auth.jsx";
 import AuthLogin from "./Auth/AuthLogin.jsx";
 import AuthRegister from "./Auth/AuthRegister.jsx";
+import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
@@ -16,8 +17,14 @@ const Components = () => {
         <Route path="/" element={<AuthModule />} />
         <Route path="/login" element={<AuthLogin />} />
         <Route path="/register" element={<AuthRegister />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/new" element={<NewNote />} />
+        <Route
+          path="/home"
+          element={<ProtectedRoute path="/home" element={Home} />}
+        />
+        <Route
+          path="/new"
+          element={<ProtectedRoute path="/new" element={NewNote} />}
+        />
       </Routes>
     </Router>
    )

@@ -13,6 +13,7 @@ const NewNote = () => {
         if (add && folder && note) {
             createNote(folder, note).then(() => {
                 setAdd(false);
+                alert("Note Succesfully Created!")
                 console.log("created note in folder: ", folder)
             })
         }

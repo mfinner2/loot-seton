@@ -18,9 +18,7 @@ const AuthLogin = () => {
     if (newUser && add) {
       loginUser(newUser).then((userLoggedIn) => {
         if (userLoggedIn) {
-          alert(
-            `${userLoggedIn.get("firstName")}, you successfully logged in!`
-          );
+          
         }
         setAdd(false);
         navigate("/home");
@@ -48,6 +46,7 @@ const AuthLogin = () => {
         user={newUser}
         onChange={onChangeHandler}
         onSubmit={onSubmitHandler}
+        isLogin={true}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import Parse from "parse";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const AuthForm = ({ user, onChange, onSubmit }) => {
+const AuthForm = ({ user, onChange, isLogin, onSubmit }) => {
   const navigate = useNavigate();
   const goBackHandler = () => {
     Parse.User.logOut();
@@ -13,6 +13,8 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
   return (
     <div>
       <form onSubmit={onSubmit}>
+        {!isLogin ? 
+        <div>
         <div>
           <label>First Name</label>
           <br />
@@ -37,6 +39,7 @@ const AuthForm = ({ user, onChange, onSubmit }) => {
             required
           />
         </div>{" "}
+        </div> : <></>}
         <div>
           <label>Email</label>
           <br />

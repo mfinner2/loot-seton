@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import NoteForm from "./NoteForm.jsx";
 import { createNote } from "../../Services/NoteImport.jsx"
-
+import Nav from "../Nav/Nav.jsx";
 
 const NewNote = () => {
     const [add, setAdd] = useState(false);
@@ -39,6 +39,7 @@ const NewNote = () => {
 
     return (
         <div>
+            <Nav />
             Create a new note!
             <NoteForm onChangeF={onChangeFHandler} onChangeN={onChangeNHandler} onClick={onClickHandler}/>
         </div>

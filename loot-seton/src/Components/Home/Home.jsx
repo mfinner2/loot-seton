@@ -10,6 +10,7 @@ import {
 } from "../../Services/FolderImport.jsx"
 import Parse from "parse";
 import { useNavigate } from "react-router-dom"
+import Nav from "../Nav/Nav.jsx";
 
 //import HomeDropDown from "./HomeDropDown.jsx";
 
@@ -69,6 +70,7 @@ const Home = () => {
     // Homelist notes Waits for a selected folder
     return (
         <div>
+            <Nav />
             <button onClick={logoutHandler}>Log Out</button>
             <div className="title">
                 <h1>noteS tooL</h1>

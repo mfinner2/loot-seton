@@ -1,6 +1,19 @@
 # Change Log
 
 
+## 0.3.0 - 2025-04-01
+- Download the code from the Github release (or the turned in zip file)
+### Added
+-	Login and Register for users
+-	Protected Routes for logged in users
+-	Must logout to reach login/register pages
+-	Logout button on home page
+### Changed
+-	Starting page is now select between register and login
+-	Home page is now /home instead of /
+### Fixed
+-	New release, so no fixes
+
 ## 0.2.0 - 2025-03-06
 - Download the code from the Github release (or the turned in zip file)
 ### Added

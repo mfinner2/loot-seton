@@ -4,12 +4,14 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 const AuthForm = ({ user, onChange, isLogin, onSubmit }) => {
   const navigate = useNavigate();
+  //make sure user isn't logged in due to registering
   const goBackHandler = () => {
     Parse.User.logOut();
 
     navigate("/");
   };
 
+  //display to login or register for the service
   return (
     <div>
       <form onSubmit={onSubmit}>

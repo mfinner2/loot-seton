@@ -7,7 +7,11 @@ import ProtectedRoute from "./ProtectedRoute/ProtectedRoute.jsx";
 import NotProtectedRoute from "./ProtectedRoute/NotProtectedRoute.jsx";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
+// Auth, login, register cannot be reached when logged in
+// home and newnote cannot be reached unless logged in
 
+// FUTURE WORK: add a path to future paths
+// nav was moved to home and newnote
 const Components = () => {
     //set up routing
    return (

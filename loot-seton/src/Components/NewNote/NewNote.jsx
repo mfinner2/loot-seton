@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import NoteForm from "./NoteForm.jsx";
 import { createNote } from "../../Services/NoteImport.jsx"
-
+import Nav from "../Nav/Nav.jsx";
 
 const NewNote = () => {
     const [add, setAdd] = useState(false);
@@ -13,6 +13,7 @@ const NewNote = () => {
         if (add && folder && note) {
             createNote(folder, note).then(() => {
                 setAdd(false);
+                alert("Note Succesfully Created!")
                 console.log("created note in folder: ", folder)
             })
         }
@@ -38,6 +39,7 @@ const NewNote = () => {
 
     return (
         <div>
+            <Nav />
             Create a new note!
             <NoteForm onChangeF={onChangeFHandler} onChangeN={onChangeNHandler} onClick={onClickHandler}/>
         </div>

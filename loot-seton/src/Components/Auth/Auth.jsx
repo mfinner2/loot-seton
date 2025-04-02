@@ -3,6 +3,7 @@ import Parse from "parse";
 import { Link } from "react-router-dom";
 
 const AuthModule = () => {
+  //display to select register/login
   return (
     <div>
       <Link to="/register">

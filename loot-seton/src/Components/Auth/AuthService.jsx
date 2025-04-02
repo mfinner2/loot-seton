@@ -1,5 +1,6 @@
 import Parse from "parse";
 
+//register a new user
 export const createUser = (newUser) => {
   const user = new Parse.User();
 
@@ -21,6 +22,7 @@ export const createUser = (newUser) => {
     });
 };
 
+//try to login a user
 export const loginUser = (newUser) => {
   const user = new Parse.User();
 

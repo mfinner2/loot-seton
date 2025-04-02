@@ -21,6 +21,7 @@ const AuthLogin = () => {
           
         }
         setAdd(false);
+        //will either put on home page or redirect to auth landing page
         navigate("/home");
       });
     }

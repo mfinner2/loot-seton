@@ -1,0 +1,9 @@
+/* Color the Background */
+body {
+    background-image: url('../../Images/squiggle_background.jpg'); 
+    margin: 0;
+  }
+  
+.outerBox {
+    background-color: aliceblue;
+}

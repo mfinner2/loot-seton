@@ -1,13 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
 
-.logo {
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -18,9 +19,9 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
-}
+} */
 
-@keyframes logo-spin {
+/* @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -33,9 +34,9 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
+} */
 
-.card {
+/* .card {
   padding: 2em;
 }
 
@@ -45,11 +46,19 @@
 
 .gap {
   clear: both;
-}
+} */
 
 h1 {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   transform: rotateY(180deg);
+  font-size: 4rem;
+  margin-bottom: 50px;
+  color: rgb(57, 57, 57);
+
+  font-family: "Limelight", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: uppercase;
   /*float: left;*/
 }
 

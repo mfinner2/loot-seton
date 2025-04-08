@@ -10,7 +10,7 @@ const AuthModule = () => {
       <div className="border">
         <div className="innerBox">
           <div>
-            <h1>Loot Seton</h1>
+            <h1>tool notes</h1>
           </div>
           <div>
             <div className="button">

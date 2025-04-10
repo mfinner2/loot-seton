@@ -48,6 +48,8 @@ const Home = () => {
             console.log("calling delete")
             deleteNote(delTarget).then(() => {
                 console.log("Removed: ", remove)
+                const newNotes = notes.filter((note) => note.id !== delTarget);
+                setNotes(newNotes);
             })
         }
         setRemove(false)

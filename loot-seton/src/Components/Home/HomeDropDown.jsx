@@ -1,4 +1,5 @@
 // THIS IS NOT BEING USED AT THE MOMENT
+import "./Home.css"
 
  const HomeDropDown = ({folders, onSelect}) => {
      const handleChange = (e) => {

@@ -1,4 +1,4 @@
-const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack}) => {
+const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelectN}) => {
     return (
         <div>
             <div>
@@ -6,13 +6,19 @@ const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack}) => {
             </div>
             <div>
                 <form>
-                    <label >Folder Name:</label>
-                    <input type="text" id="folderName" onChange={onChangeF}></input>
-                    <br />
-                    <label >Note:</label>
-                    <input type="text" id="noteContent" onChange={onChangeN}></input>
-                    <br />
-                    <button type="submit" onClick={onClick}>Edit</button>
+                    {onSelectF ? 
+                    <div>
+                        <label>Folder Name:</label>
+                        <input type="text" id="folderName" onChange={onChangeF}></input>
+                    </div>: <></>}
+                    {onSelectN ? 
+                    <div>
+                        <label>Note:</label>
+                        <input type="text" id="noteContent" onChange={onChangeN}></input>
+                    </div> : <></>}
+                    <div>
+                        <button type="submit" onClick={onClick}>Edit</button>
+                    </div>
                 </form>
             </div>
             <div>

@@ -117,8 +117,8 @@ const Home = () => {
             <div className="gap" />
             <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>
             <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/>
-            {selectEditFolder ? <HomeEditForm onBack={onSelectBack}/> : <></>}
-            {selectEditNote ? <HomeEditForm onBack={onSelectBack}/> : <></>}
+            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder}/> : <></>}
+            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote}/> : <></>}
         </div>
     )
 }

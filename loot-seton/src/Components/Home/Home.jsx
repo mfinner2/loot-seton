@@ -76,6 +76,10 @@ const Home = () => {
         setRemove(true)
     };
 
+    const onEditFolderHandler = (e) => {
+        console.log("edit folder: ", e.id)
+    }
+
     const navigate = useNavigate();
     const logoutHandler = () => {
         Parse.User.logOut();
@@ -86,14 +90,14 @@ const Home = () => {
 
     // Homelist notes Waits for a selected folder
     return (
-        <div>
-            <Nav />
-            <button onClick={logoutHandler}>Log Out</button>
+        <div className="homeMain">
             <div className="title">
                 <h1>noteS tooL</h1>
             </div>
+            <Nav />
+            <button onClick={logoutHandler}>Log Out</button>
             <div className="gap" />
-            <HomeDropDown folders={folders} onSelect={onSelectHandler} />
+            <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>
             <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler}/>
         </div>
     )

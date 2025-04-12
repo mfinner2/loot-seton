@@ -13,6 +13,7 @@ const HomeListNotes = ({notes, folder, buttonFunc}) => {
                 {filteredNotes.map((note, i) => (
                     <span>
                         <li key={i}>{note.note}</li>
+                        <button value={note} >Edit</button>
                         <button value={note.id} onClick={buttonFunc}>Delete</button>
                     </span>
                 ))}

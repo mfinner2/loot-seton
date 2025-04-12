@@ -8,7 +8,8 @@ import {
     editNote,
 } from "../../Services/NoteImport.jsx"
 import {
-    getFolders
+    getFolders,
+    editFolder,
 } from "../../Services/FolderImport.jsx"
 import Parse from "parse";
 import { useNavigate } from "react-router-dom"
@@ -26,9 +27,10 @@ const Home = () => {
     const [selectEditFolder, setSelectEditFolder] = useState(false)
     const [selectEditNote, setSelectEditNote] = useState(false)
     const [edit, setEdit] = useState(false)
-    const [editNotes, setEditNote] = useState(false)
-    const [editFolder, setEditFolder] = useState(false)
+    const [editNotes, setEditNote] = useState("")
+    const [editFolders, setEditFolder] = useState("")
     const [oldNote, setOldNote] = useState("")
+    const [oldFolder, setOldFolder] = useState("")
 
       // Get notes and Folders (Needs to be refined since I am only looking at the pointer in notes)
     useEffect(() => {
@@ -80,9 +82,31 @@ const Home = () => {
                 }
                 setEdit(false);
                 setSelectEditNote(false);
+                alert("Note Succesfully Edited!")
             })
         }
     }, [edit, editNotes, oldNote]);
+
+    // edit folder
+    useEffect(() => {
+        if (edit && editFolders && oldFolder) {
+            // console.log("editFolders: ", editFolders)
+            // console.log("Old: ", oldFolder)
+            editFolder(oldFolder, editFolders).then((result) => {
+                if (result.success){
+                    setFolders(prevFolders =>
+                        prevFolders.map(folder =>
+                            folder.id === oldFolder ? { ...folder, name: editFolders } : folder
+                        )
+                    );
+                    //alert("Note Succesfully Edited!")
+                }
+                setEdit(false);
+                setSelectEditFolder(false);
+                alert("Folder Succesfully Edited!")
+            })
+        }
+    }, [edit, editFolders, oldFolder]);
 
     //also trying to delete (not currently functional)
     const onClickHandler = (e) => {
@@ -105,13 +129,14 @@ const Home = () => {
 
     // edit folder handler
     const onEditFolderHandler = (e) => {
-        // console.log("edit folder: ", e.id)
+        //console.log("edit folder: ", e.id)
         setSelectEditFolder(true)
+        setOldFolder(e.id)
     }
 
     // edit shows edit form and sets the note id
     const onEditNoteHandler = (e) => {
-        console.log("edit note: ", e.target.value)
+        // console.log("edit note: ", e.target.value)
         setSelectEditNote(true)
         setOldNote(e.target.value)
     }
@@ -134,6 +159,12 @@ const Home = () => {
         setEditNote(e.target.value)
     }
 
+    // folder edit form filled
+    const onEditFolder = (e) => {
+        e.preventDefault();
+        setEditFolder(e.target.value)
+    }
+
     const navigate = useNavigate();
     const logoutHandler = () => {
         Parse.User.logOut();
@@ -151,9 +182,9 @@ const Home = () => {
             <Nav />
             <button onClick={logoutHandler}>Log Out</button>
             <div className="gap" />
-            <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>
-            <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/>
-            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder}/> : <></>}
+            {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>: <></>}
+            {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
+            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
             {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}
         </div>
     )

@@ -1,5 +1,3 @@
-import "./Home.css"
-
 const HomeListNotes = ({notes, folder}) => {
     //display all notes in a list
 

@@ -13,7 +13,7 @@ const HomeListNotes = ({notes, folder, buttonFunc, onEdit}) => {
                 {filteredNotes.map((note, i) => (
                     <span>
                         <li key={i}>{note.note}</li>
-                        <button value={note} onClick={onEdit}>Edit</button>
+                        <button value={note.id} onClick={onEdit}>Edit</button>
                         <button value={note.id} onClick={buttonFunc}>Delete</button>
                     </span>
                 ))}

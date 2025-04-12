@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import {
     getNotes,
     deleteNote,
+    editNote,
 } from "../../Services/NoteImport.jsx"
 import {
     getFolders
@@ -24,6 +25,10 @@ const Home = () => {
     const [selectedFolder, setSelectedFolder] = useState()
     const [selectEditFolder, setSelectEditFolder] = useState(false)
     const [selectEditNote, setSelectEditNote] = useState(false)
+    const [edit, setEdit] = useState(false)
+    const [editNotes, setEditNote] = useState(false)
+    const [editFolder, setEditFolder] = useState(false)
+    const [oldNote, setOldNote] = useState("")
 
       // Get notes and Folders (Needs to be refined since I am only looking at the pointer in notes)
     useEffect(() => {
@@ -44,7 +49,7 @@ const Home = () => {
         })
     }, [])
 
-    //trying to delete (not currently functional)
+    //trying to delete 
     useEffect(() => {
         console.log("Trying to delete")
         console.log(delTarget)
@@ -60,6 +65,24 @@ const Home = () => {
         setDelTarget("")
         console.log(remove)
     }, [remove])
+
+    // edit note
+    useEffect(() => {
+        if (edit && editNotes && oldNote) {
+            editNote(oldNote, editNotes).then((result) => {
+                if (result.success){
+                    setNotes(prevNotes =>
+                        prevNotes.map(note =>
+                            note.id === oldNote ? { ...note, note: editNotes } : note
+                        )
+                    );
+                    //alert("Note Succesfully Edited!")
+                }
+                setEdit(false);
+                setSelectEditNote(false);
+            })
+        }
+    }, [edit, editNotes, oldNote]);
 
     //also trying to delete (not currently functional)
     const onClickHandler = (e) => {
@@ -82,20 +105,33 @@ const Home = () => {
 
     // edit folder handler
     const onEditFolderHandler = (e) => {
-        console.log("edit folder: ", e.id)
+        // console.log("edit folder: ", e.id)
         setSelectEditFolder(true)
     }
 
-    // edit note handler
+    // edit shows edit form and sets the note id
     const onEditNoteHandler = (e) => {
         console.log("edit note: ", e.target.value)
         setSelectEditNote(true)
+        setOldNote(e.target.value)
     }
 
     // get rid of edit form
     const onSelectBack = () => {
         setSelectEditFolder(false)
         setSelectEditNote(false)
+    }
+
+    // check if edit submit was clicked
+    const onClicked = (e) => {
+        e.preventDefault();
+        setEdit(true)
+    }
+
+    // note edit form filled
+    const onEditNote = (e) => {
+        e.preventDefault();
+        setEditNote(e.target.value)
     }
 
     const navigate = useNavigate();
@@ -118,7 +154,7 @@ const Home = () => {
             <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>
             <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/>
             {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder}/> : <></>}
-            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote}/> : <></>}
+            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}
         </div>
     )
 }

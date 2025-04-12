@@ -17,7 +17,7 @@ const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelec
                         <input type="text" id="noteContent" onChange={onChangeN}></input>
                     </div> : <></>}
                     <div>
-                        <button type="submit" onClick={onClick}>Edit</button>
+                        <button type="submit" onClick={onClick}>Submit</button>
                     </div>
                 </form>
             </div>

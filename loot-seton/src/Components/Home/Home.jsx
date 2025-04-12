@@ -1,5 +1,6 @@
 import HomeListNotes from "./HomeListNotes.jsx";
 import HomeDropDown from "./HomeDropDown.jsx";
+import HomeEditForm from "./HomeEditForm.jsx";
 import { useState, useEffect } from 'react'
 import {
     getNotes,
@@ -21,6 +22,8 @@ const Home = () => {
     const [remove, setRemove] = useState(false);
     const [delTarget, setDelTarget] = useState("")
     const [selectedFolder, setSelectedFolder] = useState()
+    const [selectEditFolder, setSelectEditFolder] = useState(false)
+    const [selectEditNote, setSelectEditNote] = useState(false)
 
       // Get notes and Folders (Needs to be refined since I am only looking at the pointer in notes)
     useEffect(() => {
@@ -57,6 +60,7 @@ const Home = () => {
         setDelTarget("")
         console.log(remove)
     }, [remove])
+
     //also trying to delete (not currently functional)
     const onClickHandler = (e) => {
         e.preventDefault();
@@ -76,8 +80,22 @@ const Home = () => {
         setRemove(true)
     };
 
+    // edit folder handler
     const onEditFolderHandler = (e) => {
         console.log("edit folder: ", e.id)
+        setSelectEditFolder(true)
+    }
+
+    // edit note handler
+    const onEditNoteHandler = (e) => {
+        console.log("edit note: ", e.target.value)
+        setSelectEditNote(true)
+    }
+
+    // get rid of edit form
+    const onSelectBack = () => {
+        setSelectEditFolder(false)
+        setSelectEditNote(false)
     }
 
     const navigate = useNavigate();
@@ -98,7 +116,9 @@ const Home = () => {
             <button onClick={logoutHandler}>Log Out</button>
             <div className="gap" />
             <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>
-            <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler}/>
+            <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/>
+            {selectEditFolder ? <HomeEditForm onBack={onSelectBack}/> : <></>}
+            {selectEditNote ? <HomeEditForm onBack={onSelectBack}/> : <></>}
         </div>
     )
 }

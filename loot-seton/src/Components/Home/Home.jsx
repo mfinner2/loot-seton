@@ -11,6 +11,7 @@ import {
 import Parse from "parse";
 import { useNavigate } from "react-router-dom"
 import Nav from "../Nav/Nav.jsx";
+import "./Home.css"
 
 //import HomeDropDown from "./HomeDropDown.jsx";
 

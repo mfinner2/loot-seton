@@ -1,0 +1,10 @@
+
+/* Makes home background a single color */
+.homeMain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #c9c9c9;
+    width: 100%;
+    height: 100%;
+  }

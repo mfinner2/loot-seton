@@ -70,7 +70,7 @@ const Home = () => {
 
     // Homelist notes Waits for a selected folder
     return (
-        <div className="homeMain">
+        <div>
             <Nav />
             <button onClick={logoutHandler}>Log Out</button>
             <div className="title">

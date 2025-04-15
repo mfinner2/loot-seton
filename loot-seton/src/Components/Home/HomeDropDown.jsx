@@ -1,6 +1,6 @@
 import "./Home.css"
 
- const HomeDropDown = ({folders, onSelect, onEdit}) => {
+ const HomeDropDown = ({folders, onSelect, onEdit, onDelete}) => {
     //  const handleChange = (e) => {
     //     //alert(e.target.value)
     //      onSelect(e.target.value)
@@ -26,6 +26,7 @@ import "./Home.css"
                             {folder.name}
                         </span>
                         <button onClick={() => onEdit(folder)} style={{ marginLeft: '10px' }}>Edit</button>
+                        <button value={folder.id} onClick={onDelete} style={{ marginLeft: '10px' }}>Delete</button>
                     </li>
                 ))}
             </ul>

@@ -25,6 +25,7 @@ const Home = () => {
     const [remove, setRemove] = useState(false);
     const [removeFolder, setRemoveFolder] = useState(false);
     const [delTarget, setDelTarget] = useState("")
+    const [delFolderTarget, setDelFolderTarget] = useState("")
     const [selectedFolder, setSelectedFolder] = useState()
     const [selectEditFolder, setSelectEditFolder] = useState(false)
     const [selectEditNote, setSelectEditNote] = useState(false)
@@ -54,7 +55,7 @@ const Home = () => {
     }, [])
 
 
-    //delete folder
+    //delete note
     useEffect(() => {
         console.log("Trying to delete")
         console.log(delTarget)
@@ -111,22 +112,24 @@ const Home = () => {
         }
     }, [edit, editFolders, oldFolder]);
 
-
+    //delete folder
     useEffect(() => {
         console.log("Trying to delete folder")
-        console.log(selectedFolder)
-        if (removeFolder && selectedFolder) {
+        console.log(delFolderTarget)
+        if (removeFolder && delFolderTarget) {
             console.log("calling delete")
-            deleteFolder(selectedFolder).then(() => {
-                //console.log("Removed: ", remove)
-                const newFolders = folders.filter((folder) => folder.id !== selectedFolder);
+            deleteFolder(delFolderTarget, notes).then(() => {
+                console.log("Removed: ", remove)
+                const newFolders = folders.filter((folder) => folder.id !== delFolderTarget);
                 setFolders(newFolders);
+                const newNotes = notes.filter((note) => note.folder.id !== delFolderTarget);
+                setNotes(newNotes);
             })
         }
         setRemoveFolder(false)
-        setSelectedFolder("")
+        setDelFolderTarget("")
         console.log(removeFolder)
-    }, [removeFolder])
+    }, [removeFolder, delFolderTarget])
 
     
     //also trying to delete (not currently functional)
@@ -142,11 +145,21 @@ const Home = () => {
     }
 
     const onDeleteHandler = (e) => {
+        console.log(e)
         e.preventDefault();
         console.log("delete: ", e.target.value);
         setDelTarget(e.target.value)
         setRemove(true)
     };
+
+    const onDeleteFolderHandler = (e) => {
+        console.log(e)
+        e.preventDefault();
+        console.log("delete: ", e.target.value);
+        setDelFolderTarget(e.target.value)
+        setRemoveFolder(true)
+    };
+    
 
     // edit folder handler
     const onEditFolderHandler = (e) => {
@@ -185,12 +198,12 @@ const Home = () => {
         e.preventDefault();
         setEditFolder(e.target.value)
     }
-    const deleteFolderHandler = (e) => {
+/*    const deleteFolderHandler = (e) => {
         e.preventDefault();
         console.log("delete: ", e.target.value);
         //setDelTarget(e.target.value)
         //setRemove(true)
-    };
+    };*/
 
     const navigate = useNavigate();
     const logoutHandler = () => {
@@ -209,7 +222,7 @@ const Home = () => {
             <Nav />
             <button onClick={logoutHandler}>Log Out</button>
             <div className="gap" />
-            {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>: <></>}
+            {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>: <></>}
             {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
             {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
             {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}

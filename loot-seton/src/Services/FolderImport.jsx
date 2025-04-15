@@ -1,4 +1,5 @@
 import Parse from 'parse'
+import { deleteNote } from './NoteImport';
 // All folder functions using parse
 
 export let Folders = {};
@@ -75,4 +76,16 @@ export const findFolder = async (folderName) => {
         console.error("Error getting folder:", error);
         return null;
     }
+}
+
+export const deleteFolder = async (id, notes) => {
+    const Folder = Parse.Object.extend("Folder");
+    const query = new Parse.Query(Folder);
+    const filteredNotes = notes.filter((note) => note.folder.id === id);
+    for (let i = 0; i < filteredNotes.length; i++) {
+      deleteNote(filteredNotes[i].id)
+    }
+    return query.get(id).then((folder) => {
+      folder.destroy();
+    })
 }

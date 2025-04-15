@@ -10,6 +10,7 @@ import {
 import {
     getFolders,
     editFolder,
+    deleteFolder
 } from "../../Services/FolderImport.jsx"
 import Parse from "parse";
 import { useNavigate } from "react-router-dom"
@@ -22,6 +23,7 @@ const Home = () => {
     const [notes, setNotes] = useState([]);
     const [folders, setFolders] = useState([]);
     const [remove, setRemove] = useState(false);
+    const [removeFolder, setRemoveFolder] = useState(false);
     const [delTarget, setDelTarget] = useState("")
     const [selectedFolder, setSelectedFolder] = useState()
     const [selectEditFolder, setSelectEditFolder] = useState(false)
@@ -51,7 +53,8 @@ const Home = () => {
         })
     }, [])
 
-    //trying to delete 
+
+    //delete folder
     useEffect(() => {
         console.log("Trying to delete")
         console.log(delTarget)
@@ -108,6 +111,24 @@ const Home = () => {
         }
     }, [edit, editFolders, oldFolder]);
 
+
+    useEffect(() => {
+        console.log("Trying to delete folder")
+        console.log(selectedFolder)
+        if (removeFolder && selectedFolder) {
+            console.log("calling delete")
+            deleteFolder(selectedFolder).then(() => {
+                //console.log("Removed: ", remove)
+                const newFolders = folders.filter((folder) => folder.id !== selectedFolder);
+                setFolders(newFolders);
+            })
+        }
+        setRemoveFolder(false)
+        setSelectedFolder("")
+        console.log(removeFolder)
+    }, [removeFolder])
+
+    
     //also trying to delete (not currently functional)
     const onClickHandler = (e) => {
         e.preventDefault();
@@ -164,6 +185,12 @@ const Home = () => {
         e.preventDefault();
         setEditFolder(e.target.value)
     }
+    const deleteFolderHandler = (e) => {
+        e.preventDefault();
+        console.log("delete: ", e.target.value);
+        //setDelTarget(e.target.value)
+        //setRemove(true)
+    };
 
     const navigate = useNavigate();
     const logoutHandler = () => {

@@ -1,4 +1,4 @@
-const HomeListNotes = ({notes, folder, buttonFunc}) => {
+const HomeListNotes = ({notes, folder, buttonFunc, onEdit}) => {
     //display all notes in a list
 
     // Eventually create drop down list that will only print the folder based on selected folder
@@ -13,6 +13,7 @@ const HomeListNotes = ({notes, folder, buttonFunc}) => {
                 {filteredNotes.map((note, i) => (
                     <span>
                         <li key={i}>{note.note}</li>
+                        <button value={note.id} onClick={onEdit}>Edit</button>
                         <button value={note.id} onClick={buttonFunc}>Delete</button>
                     </span>
                 ))}

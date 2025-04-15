@@ -22,6 +22,23 @@ export const getFolders = async () => {
       }
 };
 
+// Edit a specific folder
+export const editFolder = async (id, newFolder) => {
+    try {
+    const Folder = Parse.Object.extend("Folder");
+    const query = new Parse.Query(Folder);
+
+    const folder = await query.get(id)
+    folder.set("name", newFolder);
+    await folder.save();
+
+    return {success: true, message: "Folder was Changed"};
+    }  catch (error) {
+        console.error("Error updating note:", error.message);
+        return { success: false, message: error.message };
+    }
+};
+
 
 // Get or create folder based on the folder name
 export const getOrCreateFolder = async (folderName) => {

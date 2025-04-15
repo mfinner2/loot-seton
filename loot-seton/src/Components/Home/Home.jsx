@@ -1,16 +1,20 @@
 import HomeListNotes from "./HomeListNotes.jsx";
 import HomeDropDown from "./HomeDropDown.jsx";
+import HomeEditForm from "./HomeEditForm.jsx";
 import { useState, useEffect } from 'react'
 import {
     getNotes,
     deleteNote,
+    editNote,
 } from "../../Services/NoteImport.jsx"
 import {
-    getFolders
+    getFolders,
+    editFolder,
 } from "../../Services/FolderImport.jsx"
 import Parse from "parse";
 import { useNavigate } from "react-router-dom"
 import Nav from "../Nav/Nav.jsx";
+import "./Home.css"
 
 //import HomeDropDown from "./HomeDropDown.jsx";
 
@@ -20,6 +24,13 @@ const Home = () => {
     const [remove, setRemove] = useState(false);
     const [delTarget, setDelTarget] = useState("")
     const [selectedFolder, setSelectedFolder] = useState()
+    const [selectEditFolder, setSelectEditFolder] = useState(false)
+    const [selectEditNote, setSelectEditNote] = useState(false)
+    const [edit, setEdit] = useState(false)
+    const [editNotes, setEditNote] = useState("")
+    const [editFolders, setEditFolder] = useState("")
+    const [oldNote, setOldNote] = useState("")
+    const [oldFolder, setOldFolder] = useState("")
 
       // Get notes and Folders (Needs to be refined since I am only looking at the pointer in notes)
     useEffect(() => {
@@ -40,7 +51,7 @@ const Home = () => {
         })
     }, [])
 
-    //trying to delete (not currently functional)
+    //trying to delete 
     useEffect(() => {
         console.log("Trying to delete")
         console.log(delTarget)
@@ -56,6 +67,47 @@ const Home = () => {
         setDelTarget("")
         console.log(remove)
     }, [remove])
+
+    // edit note
+    useEffect(() => {
+        if (edit && editNotes && oldNote) {
+            editNote(oldNote, editNotes).then((result) => {
+                if (result.success){
+                    setNotes(prevNotes =>
+                        prevNotes.map(note =>
+                            note.id === oldNote ? { ...note, note: editNotes } : note
+                        )
+                    );
+                    //alert("Note Succesfully Edited!")
+                }
+                setEdit(false);
+                setSelectEditNote(false);
+                alert("Note Succesfully Edited!")
+            })
+        }
+    }, [edit, editNotes, oldNote]);
+
+    // edit folder
+    useEffect(() => {
+        if (edit && editFolders && oldFolder) {
+            // console.log("editFolders: ", editFolders)
+            // console.log("Old: ", oldFolder)
+            editFolder(oldFolder, editFolders).then((result) => {
+                if (result.success){
+                    setFolders(prevFolders =>
+                        prevFolders.map(folder =>
+                            folder.id === oldFolder ? { ...folder, name: editFolders } : folder
+                        )
+                    );
+                    //alert("Note Succesfully Edited!")
+                }
+                setEdit(false);
+                setSelectEditFolder(false);
+                alert("Folder Succesfully Edited!")
+            })
+        }
+    }, [edit, editFolders, oldFolder]);
+
     //also trying to delete (not currently functional)
     const onClickHandler = (e) => {
         e.preventDefault();
@@ -75,6 +127,44 @@ const Home = () => {
         setRemove(true)
     };
 
+    // edit folder handler
+    const onEditFolderHandler = (e) => {
+        //console.log("edit folder: ", e.id)
+        setSelectEditFolder(true)
+        setOldFolder(e.id)
+    }
+
+    // edit shows edit form and sets the note id
+    const onEditNoteHandler = (e) => {
+        // console.log("edit note: ", e.target.value)
+        setSelectEditNote(true)
+        setOldNote(e.target.value)
+    }
+
+    // get rid of edit form
+    const onSelectBack = () => {
+        setSelectEditFolder(false)
+        setSelectEditNote(false)
+    }
+
+    // check if edit submit was clicked
+    const onClicked = (e) => {
+        e.preventDefault();
+        setEdit(true)
+    }
+
+    // note edit form filled
+    const onEditNote = (e) => {
+        e.preventDefault();
+        setEditNote(e.target.value)
+    }
+
+    // folder edit form filled
+    const onEditFolder = (e) => {
+        e.preventDefault();
+        setEditFolder(e.target.value)
+    }
+
     const navigate = useNavigate();
     const logoutHandler = () => {
         Parse.User.logOut();
@@ -85,15 +175,17 @@ const Home = () => {
 
     // Homelist notes Waits for a selected folder
     return (
-        <div>
-            <Nav />
-            <button onClick={logoutHandler}>Log Out</button>
+        <div className="homeMain">
             <div className="title">
                 <h1>noteS tooL</h1>
             </div>
+            <Nav />
+            <button onClick={logoutHandler}>Log Out</button>
             <div className="gap" />
-            <HomeDropDown folders={folders} onSelect={onSelectHandler} />
-            <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler}/>
+            {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler}/>: <></>}
+            {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
+            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
+            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}
         </div>
     )
 }

@@ -25,8 +25,13 @@ import "./Home.css"
                         <span onClick={() => onSelect(folder.id)} style={{ cursor: 'pointer' }}>
                             {folder.name}
                         </span>
+                        { folder.user?
+                        <div>
                         <button onClick={() => onEdit(folder)} style={{ marginLeft: '10px' }}>Edit</button>
                         <button value={folder.id} onClick={onDelete} style={{ marginLeft: '10px' }}>Delete</button>
+                        <div>
+                        </div>{" "}
+                        </div> : <></>}
                     </li>
                 ))}
             </ul>

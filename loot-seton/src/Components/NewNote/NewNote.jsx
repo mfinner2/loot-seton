@@ -6,8 +6,8 @@ import { useNavigate } from "react-router-dom"
 
 const NewNote = () => {
     const [add, setAdd] = useState(false);
-    const [folder, setFolder] = useState();
-    const [note, setNote] = useState();
+    const [folder, setFolder] = useState("");
+    const [note, setNote] = useState("");
 
     const navigate = useNavigate();
 
@@ -16,6 +16,8 @@ const NewNote = () => {
         if (add && folder && note) {
             createNote(folder, note).then(() => {
                 setAdd(false);
+                setNote("");
+                setFolder("");
                 alert("Note Succesfully Created!")
                 console.log("created note in folder: ", folder)
                 navigate("/home");

@@ -85,6 +85,7 @@ const Home = () => {
                     //alert("Note Succesfully Edited!")
                 }
                 setEdit(false);
+                setEditNote("");
                 setSelectEditNote(false);
                 alert("Note Succesfully Edited!")
             })
@@ -106,6 +107,7 @@ const Home = () => {
                     //alert("Note Succesfully Edited!")
                 }
                 setEdit(false);
+                setEditFolder("");
                 setSelectEditFolder(false);
                 alert("Folder Succesfully Edited!")
             })

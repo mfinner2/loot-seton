@@ -4,7 +4,7 @@ const HomeListNotes = ({notes, folder, buttonFunc, onEdit}) => {
     // Eventually create drop down list that will only print the folder based on selected folder
     //console.log("folder: ", folder)
     //console.log("notes in list ", notes)
-    const filteredNotes = notes.filter((note) => note.folder.id === folder);
+    const filteredNotes = notes.filter((note) => note.folder && note.folder.id === folder);
     //console.log("filtered notes ", filteredNotes)
 
     return (

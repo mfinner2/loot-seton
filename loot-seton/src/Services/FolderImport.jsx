@@ -9,6 +9,7 @@ Folders.collection = [];
 export const getFolders = async () => {
     try {
         const query = new Parse.Query("Folder");
+        //query._addCondition("name", "==", "Dddddd")
         const results = await query.find();
         
         return results.map((item) => ({
@@ -52,6 +53,7 @@ export const getOrCreateFolder = async (folderName) => {
         if (!folder) {
           folder = new Folder();
           folder.set("name", folderName);
+          folder.set("user", Parse.User.current())
           await folder.save();
         }
         console.log("folder id: ", folder.id)

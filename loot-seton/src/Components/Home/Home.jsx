@@ -40,9 +40,9 @@ const Home = () => {
         getNotes().then((notes) => {
             setNotes(notes)
             //console.log("notes: ", notes)
-            // const uniqueFolders = [...new Set(notes.map((item) => item.folder))]
-            // setFolders(uniqueFolders)
-            // console.log("folders: ", uniqueFolders)
+            //const uniqueFolders = [...new Set(notes.map((item) => item.folder))]
+            //setFolders(uniqueFolders)
+            //console.log("folders: ", uniqueFolders)
         })
     }, []);
 

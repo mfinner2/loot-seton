@@ -9,9 +9,15 @@ Folders.collection = [];
 export const getFolders = async () => {
     try {
         const query = new Parse.Query("Folder");
+        query.equalTo("user", null)
         const results = await query.find();
+
+        const query2 = new Parse.Query("Folder");
+        query2.equalTo("user", Parse.User.current())
+        const results2 = await query2.find();
         
-        return results.map((item) => ({
+        const resultsFinal = results.concat(results2)
+        return resultsFinal.map((item) => ({
           user: item.get("user"),
           name: item.get("name"),
           description: item.get("description"),
@@ -52,6 +58,7 @@ export const getOrCreateFolder = async (folderName) => {
         if (!folder) {
           folder = new Folder();
           folder.set("name", folderName);
+          folder.set("user", Parse.User.current())
           await folder.save();
         }
         console.log("folder id: ", folder.id)

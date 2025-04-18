@@ -3,9 +3,14 @@
 .homeMain {
     top: 0;
     left: 0;
-    background-color: #c9c9c9;
-    width: 100vw;
-    min-height: 100vh;
+    background-color: #ff0000;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
   }
 
 
@@ -16,12 +21,17 @@
   padding-bottom: 20px;
 }
 
+
+
 /* makes the left for folder, right for notes */
 .container {
-  display: grid;
-  grid-template-columns: 300px 1fr; /* 200px left, remaining space right */
-  height: 100vh;
-  width: 100vw;
+  background-color: black;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  height: max-content;
+  margin: 0;
+  padding: 0;
 }
 
 /* center title */
@@ -31,13 +41,16 @@
 }
 
 .folderList {
-  background-color: #f4f4f4;
   padding: 1rem;
   border-right: 1px solid #ccc;
+  background-color: rgb(157, 157, 225);
+
 }
 
 .noteDisplay {
   background-color: #fff;
   padding: 1rem;
+  margin: 0;
+  width: 100%;
 }
 

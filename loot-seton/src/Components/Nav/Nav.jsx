@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import "./Nav.css"
 
 const Nav = () => {
   //hold links to allow for moving between pages
   return (
     <header>
       <nav>
-        <ul>
+        <ul className="navigation">
           <li>
             <Link to="/home">Home</Link>
           </li>

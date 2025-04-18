@@ -34,6 +34,7 @@ const Home = () => {
     const [editFolders, setEditFolder] = useState("")
     const [oldNote, setOldNote] = useState("")
     const [oldFolder, setOldFolder] = useState("")
+    const [folderName, setFolderName] = useState("")
 
       // Get notes and Folders (Needs to be refined since I am only looking at the pointer in notes)
     useEffect(() => {
@@ -142,7 +143,8 @@ const Home = () => {
 
     const onSelectHandler = (folder) => {
         //alert(folder)
-        setSelectedFolder(folder)
+        setSelectedFolder(folder.id)
+        setFolderName(folder.name)
         //console.log("selected: ", selectedFolder)
     }
 
@@ -218,16 +220,19 @@ const Home = () => {
     // Homelist notes Waits for a selected folder
     return (
         <div className="homeMain">
-            <div className="title">
-                <h1>noteS tooL</h1>
+            <div className="titleBox">
+                <div className="title">
+                    <h1>loot seton</h1>
+                </div>
             </div>
             <Nav />
-            <button onClick={logoutHandler}>Log Out</button>
-            <div className="gap" />
-            {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>: <></>}
-            {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
-            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
-            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}
+            <div className="container">
+                {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>: <></>}
+                {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
+                {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
+                {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}
+                <button onClick={logoutHandler}>Log Out</button>
+            </div>
         </div>
     )
 }

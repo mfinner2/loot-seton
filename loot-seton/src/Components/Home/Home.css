@@ -1,10 +1,43 @@
 
 /* Makes home background a single color */
 .homeMain {
-    position: absolute;
     top: 0;
     left: 0;
     background-color: #c9c9c9;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    min-height: 100vh;
   }
+
+
+/* box image behind name */
+.titleBox {
+  background-color: aqua;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+/* makes the left for folder, right for notes */
+.container {
+  display: grid;
+  grid-template-columns: 300px 1fr; /* 200px left, remaining space right */
+  height: 100vh;
+  width: 100vw;
+}
+
+/* center title */
+.title {
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.folderList {
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
+}
+
+.noteDisplay {
+  background-color: #fff;
+  padding: 1rem;
+}
+

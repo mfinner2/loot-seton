@@ -1,20 +1,27 @@
 const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelectN}) => {
     return (
-        <div>
-            <div>
+        <div className="editPage">
+            <div className="editTitle">
                 <h2>Edit</h2>
             </div>
             <div>
                 <form>
                     {onSelectF ? 
                     <div>
-                        <label>Folder Name:</label>
-                        <input type="text" id="folderName" onChange={onChangeF}></input>
+                        <label htmlFor="folderName">Folder Name:</label>
+                        <br/>
+                        <input type="text" id="folderName" maxLength={20} onChange={onChangeF}></input>
                     </div>: <></>}
                     {onSelectN ? 
                     <div>
-                        <label>Note:</label>
-                        <input type="text" id="noteContent" onChange={onChangeN}></input>
+                        <label htmlFor="noteContent">Note:</label>
+                        <br/>
+                        <textarea
+                          id="noteContent"
+                          maxLength={200}
+                          onChange={onChangeN}
+                          className="note-textbox"
+                        ></textarea>
                     </div> : <></>}
                     <div>
                         <button type="submit" onClick={onClick}>Submit</button>

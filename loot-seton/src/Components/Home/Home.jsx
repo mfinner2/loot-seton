@@ -220,21 +220,25 @@ const Home = () => {
     // Homelist notes Waits for a selected folder
     return (
         <div className="homeMain">
-            <div className="titleBox">
-                <div className="title">
-                    <h1>loot seton</h1>
+            <div className="mainContent">
+                <div className="titleBox">
+                    <div className="title">
+                        <h1>loot seton</h1>
+                    </div>
+                </div>
+                <Nav />
+                <div className="bigBorder">
+                    <div className="container">
+                        {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>: <></>}
+                        {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
+                        {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
+                        {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}  
+                    </div>
                 </div>
             </div>
-            <Nav />
-            <div className="bigBorder">
-                <div className="container">
-                    {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>: <></>}
-                    {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
-                    {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
-                    {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}  
-                </div>
+            <div className="logout">            
+                <button onClick={logoutHandler}>Log Out</button>
             </div>
-            <button onClick={logoutHandler}>Log Out</button>
         </div>
     )
 }

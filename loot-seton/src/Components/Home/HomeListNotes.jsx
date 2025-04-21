@@ -9,18 +9,20 @@ const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit}) => {
 
     return (
         <div className="noteDisplay">
-            <div>
+            <div className="folderNameNoteDisplay">
                 <h2>{folderName}</h2>
             </div>
-            <ul className="stickyNote">
-                {filteredNotes.map((note, i) => (
-                    <span>
-                        <li key={i}>{note.note}</li>
-                        <button value={note.id} onClick={onEdit}>Edit</button>
-                        <button value={note.id} onClick={buttonFunc}>Delete</button>
-                    </span>
-                ))}
-            </ul>
+            <div className="stickyNote">
+                <ul>
+                    {filteredNotes.map((note, i) => (
+                        <span>
+                            <li key={i}>{note.note}</li>
+                            <button value={note.id} onClick={onEdit}>Edit</button>
+                            <button value={note.id} onClick={buttonFunc}>Delete</button>
+                        </span>
+                    ))}
+                </ul>
+            </div>
         </div>
     )
 }

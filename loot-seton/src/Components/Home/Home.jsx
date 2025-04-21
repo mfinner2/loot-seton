@@ -125,6 +125,7 @@ const Home = () => {
                 console.log("Removed: ", remove)
                 const newFolders = folders.filter((folder) => folder.id !== delFolderTarget);
                 setFolders(newFolders);
+                setFolderName("")
                 const newNotes = notes.filter((note) => note.folder.id !== delFolderTarget);
                 setNotes(newNotes);
             })

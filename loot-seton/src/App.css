@@ -69,25 +69,3 @@ h1 {
   /*float: left;*/
 }
 
-.stickyNote {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.stickyNote li {
-  background-color: rgb(226, 239, 156);
-  padding: 15px;
-  text-align: center;
-  display: inline-block;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-
-  width: 150px;
-  height: 150px;
-
-  font-family: "Permanent Marker", serif;
-  font-weight: 400;
-  font-style: normal;
-}

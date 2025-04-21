@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
 /* Makes home background a single color */
 .homeMain {
@@ -101,11 +102,57 @@
   background-color: #ff0000;
 }
 
+.folderNameNoteDisplay {
+
+  padding: 20px;
+}
+
 .noteDisplay {
   background-color: #fff;
   padding: 2rem;
   margin: 0;
   width: 100%;
+}
+
+/* this was for debugging */
+/* .stickyNote {
+  background-color: aqua;
+} */
+
+.stickyNote ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  gap: 45px;
+}
+
+.stickyNote li {
+  background-color: rgb(226, 239, 156);
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); */
+
+  width: 250px;
+  height: 200px;
+
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.stickyNote button {
+  background: none;
+  background-color: rgb(226, 239, 156);
+  padding: 10px;
+  padding-right: 45px;
+  padding-left: 40px;
+}
+
+.stickyNote button:hover {
+  background-color: #ff0000;
 }
 
 .logout {

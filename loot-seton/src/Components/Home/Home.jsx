@@ -108,6 +108,7 @@ const Home = () => {
                     );
                     //alert("Note Succesfully Edited!")
                 }
+                setFolderName(editFolders)
                 setEdit(false);
                 setEditFolder("");
                 setOldFolder("")
@@ -144,10 +145,20 @@ const Home = () => {
         setRemove(true);
     }
 
+    // Sets a folder, closes edit note/folder if open
     const onSelectHandler = (folder) => {
         //alert(folder)
         setSelectedFolder(folder.id)
         setFolderName(folder.name)
+
+        setSelectEditNote(false)
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+
+        setEditFolder("");
+        setOldFolder("")
+        setSelectEditFolder(false);
         //console.log("selected: ", selectedFolder)
     }
 
@@ -168,12 +179,15 @@ const Home = () => {
     };
     
 
-    // edit folder handler
+    // edit folder handler, shows folder you want to edit
     const onEditFolderHandler = (e) => {
         //console.log("edit folder: ", e.id)
         setSelectEditFolder(true)
         setSelectEditNote(false)
         setOldFolder(e.id)
+
+        setSelectedFolder(e.id)
+        setFolderName(e.name)
     }
 
     // edit shows edit form and sets the note id
@@ -188,6 +202,13 @@ const Home = () => {
     const onSelectBack = () => {
         setSelectEditFolder(false)
         setSelectEditNote(false)
+
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+
+        setEditFolder("");
+        setOldFolder("")
     }
 
     // check if edit submit was clicked
@@ -209,11 +230,19 @@ const Home = () => {
     }
 
     // closes folder when viewing notes
-    // also closes edit note
+    // also closes edit note/folder
     const onCloseFolderHandler = (e) => {
         e.preventDefault();
         setSelectedFolder();
+
         setSelectEditNote(false);
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+
+        setEditFolder("");
+        setOldFolder("")
+        setSelectEditFolder(false);
     }
 
 
@@ -238,11 +267,9 @@ const Home = () => {
                 <div className="bigBorder">
                     <div className="container">
                         <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>
-                        <div>
-                            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder} folderTitle={folderName}/> : <></>}
-                        </div>
                         <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler} onCloseFolder={onCloseFolderHandler}/>
                         <div>
+                            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder} folderTitle={folderName}/> : <></>}   
                             {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}  
                         </div>
                     </div>

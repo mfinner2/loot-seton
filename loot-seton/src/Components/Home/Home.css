@@ -184,6 +184,18 @@
   width: 100%;
 }
 
+/* public/private text design */
+.description {
+  margin: 10px;
+  margin-left: 20px;
+  color: rgb(57, 57, 57);
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
 /* this was for debugging */
 /* .stickyNote {
   background-color: aqua;

@@ -6,7 +6,7 @@
   
     list-style: none;
     margin: 0;
-    background: deepskyblue;
+    background: rgb(57, 57, 57);
   }
 
   .navigation a {
@@ -17,5 +17,5 @@
   }
 
   .navigation a:hover {
-    background: #1565c0;
+    background: rgb(20, 20, 20);
   }

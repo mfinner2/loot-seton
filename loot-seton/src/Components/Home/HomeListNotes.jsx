@@ -10,11 +10,13 @@ const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit, onCloseFo
     return (
         folder ? 
             <div className="noteDisplay">
-                <div className="folderNameNoteDisplay">
-                    <h2>{folderName}</h2>
-                </div>
-                <div>
-                    <button onClick={onCloseFolder}>Close Folder</button>
+                <div className="noteTop">
+                    <div className="folderNameNoteDisplay">
+                        <h2>{folderName}</h2>
+                    </div>
+                    <div className="closeFolder">
+                        <button onClick={onCloseFolder}>Close Folder</button>
+                    </div>
                 </div>
                 <div className="stickyNote">
                     <ul>

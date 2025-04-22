@@ -4,6 +4,7 @@ import NoteForm from "./NoteForm.jsx";
 import { createNote } from "../../Services/NoteImport.jsx"
 import Nav from "../Nav/Nav.jsx";
 import { useNavigate } from "react-router-dom"
+import "./Note.css"
 
 const NewNote = () => {
     const [add, setAdd] = useState(false);
@@ -57,10 +58,20 @@ const NewNote = () => {
     }
 
     return (
-        <div>
+        <div class="newNoteMain">
+            <div className="titleBox">
+                    <div className="title">
+                        <h1>loot seton</h1>
+                    </div>
+                </div>
             <Nav />
-            Create a new note!
+            <div class="limitContainer">
+
+            <div class="newNoteContainer">
+            <p class="newNoteTitle">Create a new note!</p>
             <NoteForm onChangeF={onChangeFHandler} onChangeN={onChangeNHandler} onChangeU={onChangeUHandler} onClick={onClickHandler}/>
+            </div>
+            </div>
         </div>
     )
 }

@@ -193,6 +193,7 @@
 .stickyNote ul {
   list-style: none;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 10px;
 
@@ -208,7 +209,7 @@
   display: flex;
   /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); */
 
-  width: 252px;
+  width: 254px;
   height: 200px;
 
   font-family: "Permanent Marker", serif;
@@ -313,11 +314,30 @@
 /* folder edit spacing */
 .editFolder {
   margin: 20px;
-}
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 
-/* folder edit spacing */
+  
+}
 .prevFolder {
   margin-bottom: 20px;
+  font-size: 25px;
+  color:rgb(57, 57, 57);
+}
+.newFolder {
+  font-size: 25px;
+  font-weight: 600;
+  color:rgb(57, 57, 57);
+}
+.newFolder input {
+  font-size: 20px;
+  width: 300px;
+}
+
+.folderSelectBack {
+  font-weight: 600;
 }
 
 /* edit text area design */
@@ -364,7 +384,55 @@ textarea {
   padding: 15px;
 }
 
+/* Spacing in edit note */
+.editNote {
+  margin: 20px;
+  padding-left: 15px;
+}
+.editNote label {
+  font-size: 25px;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  color: rgb(57, 57, 57);
+}
+.noteSelectText {
+  font-size: 25px;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+
+  color: rgb(57, 57, 57);
+}
+.editedNoteArea {
+  margin-top: 20px;
+}
+
+/* edit submit button design */
+.editSubmit {
+  display:flex;
+  justify-content: center;
+}
 .editSubmit button {
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
+  width: 200px;
+
+  background: rgb(57, 57, 57);
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.editSubmit button:hover {
+  background: rgb(20, 20, 20);
 }

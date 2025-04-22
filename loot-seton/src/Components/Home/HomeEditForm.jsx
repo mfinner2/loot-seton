@@ -14,32 +14,40 @@ const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelec
                     {onSelectF ? 
                     <div className="editFolder">
                         <div className="prevFolder">
-                            Folder Selected: 
-                            <br/>
+                            <div className="folderSelectBack">
+                                Folder Selected:
+                            </div>
                             {folderTitle}
                         </div>
-                        <label htmlFor="folderName">Edit Folder Name Here:</label>
-                        <br/>
-                        <input type="text"  id="folderName" maxLength={15} onChange={onChangeF}></input>
+                        <div className="newFolder">
+                            <label htmlFor="folderName">Edit Folder Name Here:</label>
+                            <br/>
+                            <input type="text"  id="folderName" maxLength={15} onChange={onChangeF} placeholder="Start Typing..." required></input>
+                        </div>
                     </div>: <></>}
                     {onSelectN ? 
-                    <div>
+                    <div className="editNote">
                         <div>
-                            Note Selected: 
-                            <br/>
+                            <div className="noteSelectText">
+                                Note Selected: 
+                            </div>
                             <div className="prevNote">
                                 {noteStuff}
                             </div>
                         </div>
-                        <label htmlFor="noteContent">Edit Note Here:</label>
-                        <br/>
-                        <textarea
-                          id="noteContent"
-                          maxLength={200}
-                        //   defaultValue={noteStuff}
-                          onChange={onChangeN}
-                          className="note-textbox"
-                        ></textarea>
+                        <div className="editedNoteArea">
+                            <label htmlFor="noteContent">Edit Note Here:</label>
+                            <br/>
+                            <textarea
+                              id="noteContent"
+                              maxLength={200}
+                            //   defaultValue={noteStuff}
+                              onChange={onChangeN}
+                              className="note-textbox"
+                              placeholder="Start Typing..."
+                              required
+                            ></textarea>
+                        </div>
                     </div> : <></>}
                     <div className="editSubmit">
                         <button type="submit" onClick={onClick}>Submit</button>

@@ -8,7 +8,7 @@ const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit, onCloseFo
     //console.log("filtered notes ", filteredNotes)
 
     return (
-        folder ? 
+        folder && folderName ? 
             <div className="noteDisplay">
                 <div className="noteTop">
                     <div className="folderNameNoteDisplay">

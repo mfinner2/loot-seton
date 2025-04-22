@@ -1,4 +1,4 @@
-const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit}) => {
+const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit, onCloseFolder}) => {
     //display all notes in a list
 
     // Eventually create drop down list that will only print the folder based on selected folder
@@ -8,22 +8,27 @@ const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit}) => {
     //console.log("filtered notes ", filteredNotes)
 
     return (
-        <div className="noteDisplay">
-            <div className="folderNameNoteDisplay">
-                <h2>{folderName}</h2>
+        folder ? 
+            <div className="noteDisplay">
+                <div className="folderNameNoteDisplay">
+                    <h2>{folderName}</h2>
+                </div>
+                <div>
+                    <button onClick={onCloseFolder}>Close Folder</button>
+                </div>
+                <div className="stickyNote">
+                    <ul>
+                        {filteredNotes.map((note, i) => (
+                            <span>
+                                <li key={i}>{note.note}</li>
+                                <button value={note.id} onClick={onEdit}>Edit</button>
+                                <button value={note.id} onClick={buttonFunc}>Delete</button>
+                            </span>
+                        ))}
+                    </ul>
+                </div>
             </div>
-            <div className="stickyNote">
-                <ul>
-                    {filteredNotes.map((note, i) => (
-                        <span>
-                            <li key={i}>{note.note}</li>
-                            <button value={note.id} onClick={onEdit}>Edit</button>
-                            <button value={note.id} onClick={buttonFunc}>Delete</button>
-                        </span>
-                    ))}
-                </ul>
-            </div>
-        </div>
+        : <div className="noteDisplay"></div>
     )
 }
 

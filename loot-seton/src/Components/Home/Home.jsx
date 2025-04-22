@@ -87,6 +87,7 @@ const Home = () => {
                 }
                 setEdit(false);
                 setEditNote("");
+                setOldNote("")
                 setSelectEditNote(false);
                 alert("Note Succesfully Edited!")
             })
@@ -109,6 +110,7 @@ const Home = () => {
                 }
                 setEdit(false);
                 setEditFolder("");
+                setOldFolder("")
                 setSelectEditFolder(false);
                 alert("Folder Succesfully Edited!")
             })
@@ -170,6 +172,7 @@ const Home = () => {
     const onEditFolderHandler = (e) => {
         //console.log("edit folder: ", e.id)
         setSelectEditFolder(true)
+        setSelectEditNote(false)
         setOldFolder(e.id)
     }
 
@@ -177,6 +180,7 @@ const Home = () => {
     const onEditNoteHandler = (e) => {
         // console.log("edit note: ", e.target.value)
         setSelectEditNote(true)
+        setSelectEditFolder(false)
         setOldNote(e.target.value)
     }
 
@@ -203,12 +207,15 @@ const Home = () => {
         e.preventDefault();
         setEditFolder(e.target.value)
     }
-/*    const deleteFolderHandler = (e) => {
+
+    // closes folder when viewing notes
+    // also closes edit note
+    const onCloseFolderHandler = (e) => {
         e.preventDefault();
-        console.log("delete: ", e.target.value);
-        //setDelTarget(e.target.value)
-        //setRemove(true)
-    };*/
+        setSelectedFolder();
+        setSelectEditNote(false);
+    }
+
 
     const navigate = useNavigate();
     const logoutHandler = () => {
@@ -230,10 +237,12 @@ const Home = () => {
                 <Nav />
                 <div className="bigBorder">
                     <div className="container">
-                        {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>: <></>}
-                        {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
+                        <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>
                         <div>
-                            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
+                            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder} folderTitle={folderName}/> : <></>}
+                        </div>
+                        <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler} onCloseFolder={onCloseFolderHandler}/>
+                        <div>
                             {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}  
                         </div>
                     </div>

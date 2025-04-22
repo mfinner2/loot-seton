@@ -1,4 +1,4 @@
-const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelectN}) => {
+const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelectN, folderTitle, noteStuff}) => {
     return (
         <div className="editPage">
             <div className="editTitle">
@@ -8,12 +8,18 @@ const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelec
                 <form>
                     {onSelectF ? 
                     <div>
+                        <div>
+                            {/* Previous: {folderTitle} */}
+                        </div>
                         <label htmlFor="folderName">Folder Name:</label>
                         <br/>
                         <input type="text" id="folderName" maxLength={20} onChange={onChangeF}></input>
                     </div>: <></>}
                     {onSelectN ? 
                     <div>
+                        <div>
+                            {/* Previous: {noteStuff} */}
+                        </div>
                         <label htmlFor="noteContent">Note:</label>
                         <br/>
                         <textarea

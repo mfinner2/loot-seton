@@ -128,8 +128,8 @@
 
 /* folder name that displays with the notes */
 .folderNameNoteDisplay {
+  padding-left: 15px;
   
-  padding: 20px;
 
   font-family: "Red Hat Display", serif;
   font-optical-sizing: auto;
@@ -146,19 +146,29 @@
   font-weight: 500;
   font-style: normal;
   padding: 10px;
+
 }
 
 .closeFolder button {
+ border-radius: 10px;
  padding: 20px;
  border: none;
+ height: 100%;
+ color: rgb(57, 57, 57);
+ background: rgb(255, 255, 255);
 }
 
+.closeFolder button:hover {
+  background: rgb(167, 167, 167);
+}
+
+/* bar at top of notes */
 .noteTop {
   display: flex;
   justify-content: space-between;
   background: rgb(57, 57, 57);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 10px;
+  align-items: center;
 }
 
 /* background for notes */
@@ -182,6 +192,7 @@
   padding: 10px;
 
   gap: 45px;
+  margin-top: 25px;
 }
 
 /* making the individual sticky notes */

@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap");
 
 /* Color the Background */
-body {
+.authBack {
     background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../../Images/Paper_background.jpg'); 
     background-size: cover;
-  background-position: center;
+    background-position: center;
     margin: 0;
   }
 

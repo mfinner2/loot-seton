@@ -1,20 +1,40 @@
-const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelectN}) => {
+const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelectN, folderTitle, noteStuff}) => {
     return (
-        <div>
-            <div>
+        <div className="editPage">
+            <div className="editTitle">
                 <h2>Edit</h2>
             </div>
             <div>
                 <form>
                     {onSelectF ? 
                     <div>
-                        <label>Folder Name:</label>
-                        <input type="text" id="folderName" onChange={onChangeF}></input>
+                        <div>
+                            Folder Selected: 
+                            <br/>
+                            {folderTitle}
+                        </div>
+                        <label htmlFor="folderName">Edit Folder Name Here:</label>
+                        <br/>
+                        <input type="text"  id="folderName" maxLength={20} onChange={onChangeF}></input>
                     </div>: <></>}
                     {onSelectN ? 
                     <div>
-                        <label>Note:</label>
-                        <input type="text" id="noteContent" onChange={onChangeN}></input>
+                        <div>
+                            Note Selected: 
+                            <br/>
+                            <div className="prevNote">
+                                {noteStuff}
+                            </div>
+                        </div>
+                        <label htmlFor="noteContent">Edit Note Here:</label>
+                        <br/>
+                        <textarea
+                          id="noteContent"
+                          maxLength={200}
+                        //   defaultValue={noteStuff}
+                          onChange={onChangeN}
+                          className="note-textbox"
+                        ></textarea>
                     </div> : <></>}
                     <div>
                         <button type="submit" onClick={onClick}>Submit</button>

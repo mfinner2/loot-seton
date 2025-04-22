@@ -18,20 +18,23 @@ import "./Home.css"
     //     </div>
     //  )
     return (
-        <div>
+        <div className="folderList">
             <ul>
                 {folders.map((folder) => (
                     <li key={folder.id}>
-                        <span onClick={() => onSelect(folder.id)} style={{ cursor: 'pointer' }}>
+                        <button className="folderName" onClick={() => onSelect(folder)}>
                             {folder.name}
-                        </span>
-                        { folder.user?
+                        </button>
+                        {/* { folder.user?
                         <div>
                         <button onClick={() => onEdit(folder)} style={{ marginLeft: '10px' }}>Edit</button>
-                        <button value={folder.id} onClick={onDelete} style={{ marginLeft: '10px' }}>Delete</button>
                         <div>
                         </div>{" "}
-                        </div> : <></>}
+                        </div> : <></>} */}
+                        <div className="folderButtons">
+                            <button onClick={() => onEdit(folder)}>Edit</button>
+                            <button value={folder.id} onClick={onDelete}>Delete</button>
+                        </div>
                     </li>
                 ))}
             </ul>

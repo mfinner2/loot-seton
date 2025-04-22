@@ -34,6 +34,8 @@ const Home = () => {
     const [editFolders, setEditFolder] = useState("")
     const [oldNote, setOldNote] = useState("")
     const [oldFolder, setOldFolder] = useState("")
+    const [folderName, setFolderName] = useState("")
+    const [prevNote, setPrevNote] = useState("")
 
       // Get notes and Folders (Needs to be refined since I am only looking at the pointer in notes)
     useEffect(() => {
@@ -86,6 +88,7 @@ const Home = () => {
                 }
                 setEdit(false);
                 setEditNote("");
+                setOldNote("")
                 setSelectEditNote(false);
                 alert("Note Succesfully Edited!")
             })
@@ -106,8 +109,10 @@ const Home = () => {
                     );
                     //alert("Note Succesfully Edited!")
                 }
+                setFolderName(editFolders)
                 setEdit(false);
                 setEditFolder("");
+                setOldFolder("")
                 setSelectEditFolder(false);
                 alert("Folder Succesfully Edited!")
             })
@@ -124,6 +129,7 @@ const Home = () => {
                 console.log("Removed: ", remove)
                 const newFolders = folders.filter((folder) => folder.id !== delFolderTarget);
                 setFolders(newFolders);
+                setFolderName("")
                 const newNotes = notes.filter((note) => note.folder.id !== delFolderTarget);
                 setNotes(newNotes);
             })
@@ -140,9 +146,21 @@ const Home = () => {
         setRemove(true);
     }
 
+    // Sets a folder, closes edit note/folder if open
     const onSelectHandler = (folder) => {
         //alert(folder)
-        setSelectedFolder(folder)
+        setSelectedFolder(folder.id)
+        setFolderName(folder.name)
+
+        setSelectEditNote(false)
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+        setPrevNote("")
+
+        setEditFolder("");
+        setOldFolder("")
+        setSelectEditFolder(false);
         //console.log("selected: ", selectedFolder)
     }
 
@@ -163,30 +181,51 @@ const Home = () => {
     };
     
 
-    // edit folder handler
+    // edit folder handler, shows folder you want to edit
     const onEditFolderHandler = (e) => {
         //console.log("edit folder: ", e.id)
         setSelectEditFolder(true)
+        setSelectEditNote(false)
         setOldFolder(e.id)
+
+        setSelectedFolder(e.id)
+        setFolderName(e.name)
     }
 
-    // edit shows edit form and sets the note id
+    // shows edit form and sets the note id
     const onEditNoteHandler = (e) => {
         // console.log("edit note: ", e.target.value)
         setSelectEditNote(true)
+        setSelectEditFolder(false)
         setOldNote(e.target.value)
+
+        const id = e.target.value;
+        const foundNote = notes.find(note => note.id === id)
+        setPrevNote(foundNote.note);
     }
 
     // get rid of edit form
     const onSelectBack = () => {
         setSelectEditFolder(false)
         setSelectEditNote(false)
+
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+        setPrevNote("")
+
+        setEditFolder("");
+        setOldFolder("")
     }
 
-    // check if edit submit was clicked
+    // check if edit submit was clicked while folders/notes are ready 
     const onClicked = (e) => {
         e.preventDefault();
-        setEdit(true)
+
+        if ((editFolders && oldFolder) || (editNotes && oldNote)){
+            setEdit(true)
+        }
+        console.log("is edit: ", edit)
     }
 
     // note edit form filled
@@ -200,12 +239,25 @@ const Home = () => {
         e.preventDefault();
         setEditFolder(e.target.value)
     }
-/*    const deleteFolderHandler = (e) => {
+
+    // closes folder when viewing notes
+    // also closes edit note/folder
+    const onCloseFolderHandler = (e) => {
         e.preventDefault();
-        console.log("delete: ", e.target.value);
-        //setDelTarget(e.target.value)
-        //setRemove(true)
-    };*/
+        setSelectedFolder();
+
+        setSelectEditNote(false);
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+        setPrevNote("")
+
+        setEditFolder("");
+        setOldFolder("")
+        setFolderName("")
+        setSelectEditFolder(false);
+    }
+
 
     const navigate = useNavigate();
     const logoutHandler = () => {
@@ -218,16 +270,27 @@ const Home = () => {
     // Homelist notes Waits for a selected folder
     return (
         <div className="homeMain">
-            <div className="title">
-                <h1>noteS tooL</h1>
+            <div className="mainContent">
+                <div className="titleBox">
+                    <div className="title">
+                        <h1>loot seton</h1>
+                    </div>
+                </div>
+                <Nav />
+                <div className="bigBorder">
+                    <div className="container">
+                        <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>
+                        <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler} onCloseFolder={onCloseFolderHandler}/>
+                        <div>
+                            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder} folderTitle={folderName}/> : <></>}   
+                            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote} noteStuff={prevNote}/> : <></>}  
+                        </div>
+                    </div>
+                </div>
             </div>
-            <Nav />
-            <button onClick={logoutHandler}>Log Out</button>
-            <div className="gap" />
-            {!selectEditFolder && !selectEditNote ? <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>: <></>}
-            {!selectEditFolder && !selectEditNote ? <HomeListNotes notes={notes} folder={selectedFolder} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler}/> : <></>}
-            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder}/> : <></>}
-            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote}/> : <></>}
+            <div className="logout">            
+                <button onClick={logoutHandler}>Log Out</button>
+            </div>
         </div>
     )
 }

@@ -1,10 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap");
 
-/* Makes home background a single color */
+/* Makes home background image */
 .homeMain {
-    position: absolute;
     top: 0;
     left: 0;
-    background-color: #c9c9c9;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../../Images/home_background.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    min-height: 100vh;
     width: 100%;
-    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* display: flex;
+    flex-direction: column; */
   }
+
+/* allows logout to always be at bottom */
+.mainContent {
+  min-height: 95vh;
+}
+
+
+/* box image behind name */
+.titleBox {
+  background-color: rgb(255, 255, 255);
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+
+
+/* makes the left for folder, right for notes */
+.container {
+  background-color: rgb(57, 57, 57);
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  min-height: 60vh;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  /* margin: 0; */
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* center title */
+.title {
+  text-align: center;
+  flex-wrap: wrap-reverse;
+}
+
+/* div for folder name and buttons */
+.folderList {
+  /* padding: 2rem; */
+  border-right: 3px solid rgb(57, 57, 57);
+  background-color: rgb(119, 193, 191);
+  min-width: 350px;
+
+}
+
+/* gets rid of bullets */
+.folderList ul {
+  list-style: none;
+  padding: 0;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.folderList li {
+  display: flex;
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+/* folder name design */
+.folderName {
+  flex-grow: 1;
+  text-align: left;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 15px;
+  border-bottom: 1px solid rgb(61, 111, 110);
+  border-right: none;
+  border-left: none;
+  border-top: 1px solid rgb(214, 250, 248);
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* hover options for folder name */
+.folderName:hover {
+  background-color: rgb(49, 120, 117);
+}
+
+/* edit/delete design */
+.folderButtons button {
+  flex-grow: 1;
+  text-align: left;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 15px;
+
+  border-bottom: 1px solid rgb(61, 111, 110);
+  border-right: none;
+  border-left: 1px solid rgb(61, 111, 110);
+  border-top: 1px solid rgb(214, 250, 248);
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* hover color for edit/delete */
+.folderButtons button:hover{
+  background-color: rgb(49, 120, 117);
+}
+
+/* folder name that displays with the notes */
+.folderNameNoteDisplay {
+  
+  padding: 20px;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  color: white;
+}
+
+/* button for close folder */
+.closeFolder {
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  padding: 10px;
+}
+
+.closeFolder button {
+ padding: 20px;
+ border: none;
+}
+
+.noteTop {
+  display: flex;
+  justify-content: space-between;
+  background: rgb(57, 57, 57);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* background for notes */
+.noteDisplay {
+  background-color: #fff;
+  padding: 2rem;
+  margin: 0;
+  width: 100%;
+}
+
+/* this was for debugging */
+/* .stickyNote {
+  background-color: aqua;
+} */
+
+/* note list design */
+.stickyNote ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  gap: 45px;
+}
+
+/* making the individual sticky notes */
+.stickyNote li {
+  background-color: rgb(244, 244, 157);
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); */
+
+  width: 250px;
+  height: 200px;
+
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* edit/delete note design */
+.stickyNote button {
+  background: none;
+  background-color: rgb(229, 215, 65);
+  padding: 10px;
+  padding-right: 45px;
+  padding-left: 40px;
+}
+
+.stickyNote button:hover {
+  background-color: rgb(194, 161, 17);
+}
+
+
+/* logout bar on button */
+.logout {
+  background-color: rgb(57, 57, 57);
+  display: flex;
+  justify-content: right;
+}
+
+/* logout button */
+.logout button {
+  padding: 15px;
+  background: none;
+  border: none;
+  color: white;
+}
+
+.logout button:hover {
+  background: rgb(20, 20, 20)
+}
+
+.editPage {
+  background-color: white;
+  width: 400px;
+  height: 100%;
+  padding: 20px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* edit text area design */
+textarea {
+  resize: none;
+  border: 5px #ccc;
+  background-color: rgb(226, 239, 156);
+
+  height: 250px;
+  width: 275px;
+
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  padding: 15px;
+}
+
+.editTitle {
+  padding-bottom: 10px;
+}
+
+/* previous note font and background */
+.prevNote {
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  border: 5px #ccc;
+  background-color: rgb(226, 239, 156);
+
+  height: 250px;
+  width: 275px;
+
+  padding: 15px;
+}

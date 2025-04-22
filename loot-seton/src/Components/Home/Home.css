@@ -181,15 +181,37 @@
   flex-direction: column;
 }
 
+/* edit text area design */
 textarea {
   resize: none;
-  border-radius: 6px;
-  border: 5px solid #ccc;
+  border: 5px #ccc;
+  background-color: rgb(226, 239, 156);
 
-  height: 300px;
-  width: 300px;
+  height: 250px;
+  width: 275px;
+
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  padding: 15px;
 }
 
 .editTitle {
-  padding-bottom: 10px;;
+  padding-bottom: 10px;
+}
+
+/* previous note font and background */
+.prevNote {
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  border: 5px #ccc;
+  background-color: rgb(226, 239, 156);
+
+  height: 250px;
+  width: 275px;
+
+  padding: 15px;
 }

@@ -9,22 +9,29 @@ const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelec
                     {onSelectF ? 
                     <div>
                         <div>
-                            {/* Previous: {folderTitle} */}
+                            Folder Selected: 
+                            <br/>
+                            {folderTitle}
                         </div>
-                        <label htmlFor="folderName">Folder Name:</label>
+                        <label htmlFor="folderName">Edit Folder Name Here:</label>
                         <br/>
-                        <input type="text" id="folderName" maxLength={20} onChange={onChangeF}></input>
+                        <input type="text"  id="folderName" maxLength={20} onChange={onChangeF}></input>
                     </div>: <></>}
                     {onSelectN ? 
                     <div>
                         <div>
-                            {/* Previous: {noteStuff} */}
+                            Note Selected: 
+                            <br/>
+                            <div className="prevNote">
+                                {noteStuff}
+                            </div>
                         </div>
-                        <label htmlFor="noteContent">Note:</label>
+                        <label htmlFor="noteContent">Edit Note Here:</label>
                         <br/>
                         <textarea
                           id="noteContent"
                           maxLength={200}
+                        //   defaultValue={noteStuff}
                           onChange={onChangeN}
                           className="note-textbox"
                         ></textarea>

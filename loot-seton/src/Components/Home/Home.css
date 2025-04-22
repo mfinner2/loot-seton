@@ -25,9 +25,9 @@
 
 /* box image behind name */
 .titleBox {
-  background-color: rgb(255, 255, 255);
+  background: rgb(57, 57, 57);
   padding-top: 30px;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 }
 
 
@@ -50,6 +50,11 @@
 .title {
   text-align: center;
   flex-wrap: wrap-reverse;
+}
+
+.title h1 {
+  color: white;
+  margin: 0;
 }
 
 /* div for folder name and buttons */
@@ -179,6 +184,18 @@
   width: 100%;
 }
 
+/* public/private text design */
+.description {
+  margin: 10px;
+  margin-left: 20px;
+  color: rgb(57, 57, 57);
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
 /* this was for debugging */
 /* .stickyNote {
   background-color: aqua;
@@ -188,10 +205,11 @@
 .stickyNote ul {
   list-style: none;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 10px;
 
-  gap: 45px;
+  gap: 40px;
   margin-top: 25px;
 }
 
@@ -203,7 +221,7 @@
   display: flex;
   /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); */
 
-  width: 250px;
+  width: 254px;
   height: 200px;
 
   font-family: "Permanent Marker", serif;
@@ -218,6 +236,16 @@
   padding: 10px;
   padding-right: 45px;
   padding-left: 40px;
+
+  border-bottom: 2px solid rgb(185, 159, 30);
+  border-right: 2px solid rgb(185, 159, 30);
+  border-top: 2px solid #fff9b2;
+  border-left: 2px solid #fff9b2;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .stickyNote button:hover {
@@ -228,6 +256,7 @@
 /* logout bar on button */
 .logout {
   background-color: rgb(57, 57, 57);
+  border-top: 5px solid white;
   display: flex;
   justify-content: right;
 }
@@ -238,29 +267,96 @@
   background: none;
   border: none;
   color: white;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 
 .logout button:hover {
   background: rgb(20, 20, 20)
 }
 
+/* edit page design */
 .editPage {
   background-color: white;
   width: 400px;
   height: 100%;
-  padding: 20px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;;
+  padding: 30px;
+  border-left: 3px solid rgb(57, 57, 57);
+  /* border-right: 1px solid black;; */
 
   display: flex;
   flex-direction: column;
+}
+
+/* top bar in edit */
+.editTop {
+  display: flex;
+  justify-content: space-between;
+  background: rgb(57, 57, 57);
+  border-radius: 10px;
+  align-items: center;
+}
+
+/* close edit button design */
+.closeEdit {
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  padding: 10px;
+
+}
+
+.closeEdit button {
+ border-radius: 10px;
+ padding: 20px;
+ border: none;
+ height: 100%;
+ color: rgb(57, 57, 57);
+ background: rgb(255, 255, 255);
+}
+
+.closeEdit button:hover {
+  background: rgb(167, 167, 167);
+}
+
+/* folder edit spacing */
+.editFolder {
+  margin: 20px;
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  
+}
+.prevFolder {
+  margin-bottom: 20px;
+  font-size: 25px;
+  color:rgb(57, 57, 57);
+}
+.newFolder {
+  font-size: 25px;
+  font-weight: 600;
+  color:rgb(57, 57, 57);
+}
+.newFolder input {
+  font-size: 20px;
+  width: 300px;
+}
+
+.folderSelectBack {
+  font-weight: 600;
 }
 
 /* edit text area design */
 textarea {
   resize: none;
   border: 5px #ccc;
-  background-color: rgb(226, 239, 156);
+  background-color: rgb(244, 244, 157);
 
   height: 250px;
   width: 275px;
@@ -272,8 +368,17 @@ textarea {
   padding: 15px;
 }
 
+/* edit title design */
 .editTitle {
-  padding-bottom: 10px;
+  padding-left: 15px;
+  
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+  color: white;
 }
 
 /* previous note font and background */
@@ -283,10 +388,63 @@ textarea {
   font-style: normal;
 
   border: 5px #ccc;
-  background-color: rgb(226, 239, 156);
+  background-color: rgb(244, 244, 157);
 
   height: 250px;
   width: 275px;
 
   padding: 15px;
+}
+
+/* Spacing in edit note */
+.editNote {
+  margin: 20px;
+  padding-left: 15px;
+}
+.editNote label {
+  font-size: 25px;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  color: rgb(57, 57, 57);
+}
+.noteSelectText {
+  font-size: 25px;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+
+  color: rgb(57, 57, 57);
+}
+.editedNoteArea {
+  margin-top: 20px;
+}
+
+/* edit submit button design */
+.editSubmit {
+  display:flex;
+  justify-content: center;
+}
+.editSubmit button {
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+
+  background: rgb(57, 57, 57);
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  font-family: "Red Hat Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.editSubmit button:hover {
+  background: rgb(20, 20, 20);
 }

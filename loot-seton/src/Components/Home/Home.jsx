@@ -280,7 +280,7 @@ const Home = () => {
                 <div className="bigBorder">
                     <div className="container">
                         <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>
-                        <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler} onCloseFolder={onCloseFolderHandler}/>
+                        <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler} onCloseFolder={onCloseFolderHandler} allFolders={folders}/>
                         <div>
                             {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder} folderTitle={folderName}/> : <></>}   
                             {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote} noteStuff={prevNote}/> : <></>}  

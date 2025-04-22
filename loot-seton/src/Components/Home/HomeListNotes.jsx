@@ -1,4 +1,4 @@
-const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit, onCloseFolder}) => {
+const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit, onCloseFolder, allFolders}) => {
     //display all notes in a list
 
     // Eventually create drop down list that will only print the folder based on selected folder
@@ -6,9 +6,10 @@ const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit, onCloseFo
     //console.log("notes in list ", notes)
     const filteredNotes = notes.filter((note) => note.folder && note.folder.id === folder);
     //console.log("filtered notes ", filteredNotes)
+    const folderObj = allFolders.find(f => f.id === folder);
 
     return (
-        folder ? 
+        folder && folderName ? 
             <div className="noteDisplay">
                 <div className="noteTop">
                     <div className="folderNameNoteDisplay">
@@ -17,6 +18,9 @@ const HomeListNotes = ({notes, folder, folderName, buttonFunc, onEdit, onCloseFo
                     <div className="closeFolder">
                         <button onClick={onCloseFolder}>Close Folder</button>
                     </div>
+                </div>
+                <div className="description">
+                    Description: {folderObj?.user ? "Private Folder" : "Public Folder"}
                 </div>
                 <div className="stickyNote">
                     <ul>

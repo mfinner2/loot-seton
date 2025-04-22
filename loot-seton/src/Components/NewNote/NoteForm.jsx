@@ -1,4 +1,4 @@
-const NoteForm = ({onChangeF, onChangeN, onClick}) => {
+const NoteForm = ({onChangeF, onChangeN, onChangeU, onClick}) => {
     return (
         <div>
             <form>
@@ -7,6 +7,9 @@ const NoteForm = ({onChangeF, onChangeN, onClick}) => {
                 <br />
                 <label >Note:</label>
                 <input type="text" id="noteContent" onChange={onChangeN}></input>
+                <br />
+                <label >Make Private?</label>
+                <input type="checkbox" id="user" onChange={onChangeU}></input>
                 <br />
                 <button type="submit" onClick={onClick}>Create</button>
             </form>

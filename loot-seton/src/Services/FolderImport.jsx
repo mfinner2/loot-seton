@@ -48,17 +48,18 @@ export const editFolder = async (id, newFolder) => {
 
 
 // Get or create folder based on the folder name
-export const getOrCreateFolder = async (folderName) => {
+export const getOrCreateFolder = async (folderName, targetUser) => {
     const Folder = Parse.Object.extend("Folder");
     const query = new Parse.Query(Folder);
     query.equalTo("name", folderName)
+    query.equalTo("user", targetUser)
 
     try {
         let folder = await query.first();
         if (!folder) {
           folder = new Folder();
           folder.set("name", folderName);
-          folder.set("user", Parse.User.current())
+          folder.set("user", targetUser)
           await folder.save();
         }
         console.log("folder id: ", folder.id)

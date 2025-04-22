@@ -42,7 +42,7 @@ const AuthLogin = () => {
   };
 
   return (
-    <div>
+    <div className="authBack">
       <AuthForm
         user={newUser}
         onChange={onChangeHandler}

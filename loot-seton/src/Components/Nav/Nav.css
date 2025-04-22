@@ -1,0 +1,21 @@
+.navigation {
+    /* flexbox styles */
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+  
+    list-style: none;
+    margin: 0;
+    background: rgb(57, 57, 57);
+  }
+
+  .navigation a {
+    text-decoration: none;
+    display: block;
+    padding: 1em;
+    color: white;
+  }
+
+  .navigation a:hover {
+    background: rgb(20, 20, 20);
+  }

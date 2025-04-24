@@ -92,10 +92,9 @@
     resize: none;
     border: 5px #ccc;
     background-color: rgb(244, 244, 157);
-  
     height: 250px;
     width: 275px;
-  
+    margin-bottom: 20px;
     font-family: "Permanent Marker", serif;
     font-weight: 400;
     font-style: normal;

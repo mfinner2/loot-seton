@@ -205,6 +205,7 @@
 .stickyNote{
   word-break: break-word;
   overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .stickyNote ul {
@@ -222,7 +223,7 @@
 .stickyNote li {
   background-color: rgb(244, 244, 157);
   padding: 15px;
-  text-align: center;
+  /* text-align: center; */
   display: flex;
   /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); */
 
@@ -402,7 +403,7 @@ textarea {
 
   word-break: break-word;
   overflow-wrap: break-word;
-  text-align: center;
+
 }
 
 /* Spacing in edit note */

@@ -59,31 +59,27 @@
     
   }
 
-  form {
+  .newNoteForm {
     color: rgb(57, 57, 57);
     padding-left: 100px;
   }
 
-  form label {
+  .newNoteLabel {
     font-size: 2rem;
   }
 
-  form input {
+  .newNoteInput {
     font-size: 2rem;
     margin-bottom: 20px;
   }
 
-  .form-switch .form-check-input {
+  .form-check-input {
     background-color: rgba(57, 57, 57, .25);
   }
 
   .form-check-input:checked {
     background-color: rgb(119, 193, 191);
     border-color: rgb(119, 193, 191);
-  }
-
-  form button {
-    font-size: 2rem;
   }
 
   .checkboxStyle {
@@ -112,6 +108,8 @@
     color: white;
     border-radius: 10px;
     width: 275px;
+    font-size: 2rem;
+
   }
 
   .submitButton:hover {

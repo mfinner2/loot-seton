@@ -92,7 +92,7 @@
     justify-content: space-between;
   }
 
-  textarea {
+  textarea .newNoteNote {
     resize: none;
     border: 5px #ccc;
     background-color: rgb(244, 244, 157);

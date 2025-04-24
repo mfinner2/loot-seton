@@ -10,7 +10,7 @@ const NoteForm = ({onChangeF, onChangeN, onChangeU, onClick}) => {
                 <br />
                 <label >Note</label>
                 <br />
-                <textarea id="noteContent" onChange={onChangeN} maxLength={100}></textarea>
+                <textarea id="noteContent" className="newNoteNote" onChange={onChangeN} maxLength={100}></textarea>
                 <br />
                 <br />
                 <div className="checkboxStyle">

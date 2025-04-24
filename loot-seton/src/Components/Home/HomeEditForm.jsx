@@ -40,7 +40,7 @@ const HomeEditForm = ({onChangeF, onChangeN, onClick, onBack, onSelectF, onSelec
                             <br/>
                             <textarea
                               id="noteContent"
-                              maxLength={200}
+                              maxLength={100}
                             //   defaultValue={noteStuff}
                               onChange={onChangeN}
                               className="note-textbox"

@@ -65,10 +65,10 @@ const NewNote = () => {
                     </div>
                 </div>
             <Nav />
-            <div class="limitContainer">
+            <div className="limitContainer">
 
-            <div class="newNoteContainer">
-            <p class="newNoteTitle">Create a new note!</p>
+            <div className="newNoteContainer">
+            <p className="newNoteTitle">Create a new note!</p>
             <NoteForm onChangeF={onChangeFHandler} onChangeN={onChangeNHandler} onChangeU={onChangeUHandler} onClick={onClickHandler}/>
             </div>
             </div>

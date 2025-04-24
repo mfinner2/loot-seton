@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500&display=swap");
+
+
+.newNoteTitle {
+    font-size: 3rem;
+    color: rgb(57, 57, 57);
+}
+
+.newNoteMain {
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('../../Images/home_background.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    /* display: flex;
+    flex-direction: column; */
+  }
+
+  .limitContainer {
+    width: 80%;
+    margin: auto;
+  }
+
+  .titleBox {
+    background-color: rgb(57, 57, 57);
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+
+  .title {
+    text-align: center;
+    flex-wrap: wrap-reverse;
+  }
+
+  .title h1 {
+    color: white;
+    margin: 0;
+  }
+
+  .newNoteContainer {
+    background-color: white;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    min-height: 60vh;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    /* margin: 0; */
+    padding: 20px;
+    border-radius: 20px;
+    font-family: "Red Hat Display", serif;
+
+    
+  }
+
+  form {
+    color: rgb(57, 57, 57);
+    padding-left: 100px;
+  }
+
+  form label {
+    font-size: 2rem;
+  }
+
+  form input {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .form-switch .form-check-input {
+    background-color: rgba(57, 57, 57, .25);
+  }
+
+  .form-check-input:checked {
+    background-color: rgb(119, 193, 191);
+    border-color: rgb(119, 193, 191);
+  }
+
+  form button {
+    font-size: 2rem;
+  }
+
+  .checkboxStyle {
+    display: flex;
+    width: 275px;
+    justify-content: space-between;
+  }
+
+  textarea {
+    resize: none;
+    border: 5px #ccc;
+    background-color: rgb(244, 244, 157);
+  
+    height: 250px;
+    width: 275px;
+  
+    font-family: "Permanent Marker", serif;
+    font-weight: 400;
+    font-style: normal;
+  
+    padding: 15px;
+  }
+
+  .submitButton {
+    background-color: rgb(57, 57, 57);
+    color: white;
+    border-radius: 10px;
+    width: 275px;
+  }
+
+  .submitButton:hover {
+    background-color: rgb(20, 20, 20);
+  }

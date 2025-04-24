@@ -72,6 +72,7 @@ const NewNote = () => {
             <NoteForm onChangeF={onChangeFHandler} onChangeN={onChangeNHandler} onChangeU={onChangeUHandler} onClick={onClickHandler}/>
             </div>
             </div>
+            <br />
         </div>
     )
 }

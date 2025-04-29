@@ -8,14 +8,17 @@ Folders.collection = [];
 // Get All Folders
 export const getFolders = async () => {
     try {
+        //get public folders
         const query = new Parse.Query("Folder");
         query.equalTo("user", null)
         const results = await query.find();
 
+        //get private folders
         const query2 = new Parse.Query("Folder");
         query2.equalTo("user", Parse.User.current())
         const results2 = await query2.find();
         
+        //combine both sets of folders to return
         const resultsFinal = results.concat(results2)
         return resultsFinal.map((item) => ({
           user: item.get("user"),
@@ -89,6 +92,7 @@ export const findFolder = async (folderName) => {
 export const deleteFolder = async (id, notes) => {
     const Folder = Parse.Object.extend("Folder");
     const query = new Parse.Query(Folder);
+    //get rid of child notes before deleting the folder
     const filteredNotes = notes.filter((note) => note.folder.id === id);
     for (let i = 0; i < filteredNotes.length; i++) {
       deleteNote(filteredNotes[i].id)

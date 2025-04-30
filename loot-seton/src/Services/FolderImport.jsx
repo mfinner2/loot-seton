@@ -1,4 +1,5 @@
 import Parse from 'parse'
+import { deleteNote } from './NoteImport';
 // All folder functions using parse
 
 export let Folders = {};
@@ -7,10 +8,19 @@ Folders.collection = [];
 // Get All Folders
 export const getFolders = async () => {
     try {
+        //get public folders
         const query = new Parse.Query("Folder");
+        query.equalTo("user", null)
         const results = await query.find();
+
+        //get private folders
+        const query2 = new Parse.Query("Folder");
+        query2.equalTo("user", Parse.User.current())
+        const results2 = await query2.find();
         
-        return results.map((item) => ({
+        //combine both sets of folders to return
+        const resultsFinal = results.concat(results2)
+        return resultsFinal.map((item) => ({
           user: item.get("user"),
           name: item.get("name"),
           description: item.get("description"),
@@ -22,18 +32,37 @@ export const getFolders = async () => {
       }
 };
 
+// Edit a specific folder
+export const editFolder = async (id, newFolder) => {
+    try {
+    const Folder = Parse.Object.extend("Folder");
+    const query = new Parse.Query(Folder);
+
+    const folder = await query.get(id)
+    folder.set("name", newFolder);
+    await folder.save();
+
+    return {success: true, message: "Folder was Changed"};
+    }  catch (error) {
+        console.error("Error updating note:", error.message);
+        return { success: false, message: error.message };
+    }
+};
+
 
 // Get or create folder based on the folder name
-export const getOrCreateFolder = async (folderName) => {
+export const getOrCreateFolder = async (folderName, targetUser) => {
     const Folder = Parse.Object.extend("Folder");
     const query = new Parse.Query(Folder);
     query.equalTo("name", folderName)
+    query.equalTo("user", targetUser)
 
     try {
         let folder = await query.first();
         if (!folder) {
           folder = new Folder();
           folder.set("name", folderName);
+          folder.set("user", targetUser)
           await folder.save();
         }
         console.log("folder id: ", folder.id)
@@ -58,4 +87,17 @@ export const findFolder = async (folderName) => {
         console.error("Error getting folder:", error);
         return null;
     }
+}
+
+export const deleteFolder = async (id, notes) => {
+    const Folder = Parse.Object.extend("Folder");
+    const query = new Parse.Query(Folder);
+    //get rid of child notes before deleting the folder
+    const filteredNotes = notes.filter((note) => note.folder.id === id);
+    for (let i = 0; i < filteredNotes.length; i++) {
+      deleteNote(filteredNotes[i].id)
+    }
+    return query.get(id).then((folder) => {
+      folder.destroy();
+    })
 }

@@ -1,16 +1,21 @@
 import HomeListNotes from "./HomeListNotes.jsx";
 import HomeDropDown from "./HomeDropDown.jsx";
+import HomeEditForm from "./HomeEditForm.jsx";
 import { useState, useEffect } from 'react'
 import {
     getNotes,
     deleteNote,
+    editNote,
 } from "../../Services/NoteImport.jsx"
 import {
-    getFolders
+    getFolders,
+    editFolder,
+    deleteFolder
 } from "../../Services/FolderImport.jsx"
 import Parse from "parse";
 import { useNavigate } from "react-router-dom"
 import Nav from "../Nav/Nav.jsx";
+import "./Home.css"
 
 //import HomeDropDown from "./HomeDropDown.jsx";
 
@@ -18,16 +23,28 @@ const Home = () => {
     const [notes, setNotes] = useState([]);
     const [folders, setFolders] = useState([]);
     const [remove, setRemove] = useState(false);
+    const [removeFolder, setRemoveFolder] = useState(false);
+    const [delTarget, setDelTarget] = useState("")
+    const [delFolderTarget, setDelFolderTarget] = useState("")
     const [selectedFolder, setSelectedFolder] = useState()
+    const [selectEditFolder, setSelectEditFolder] = useState(false)
+    const [selectEditNote, setSelectEditNote] = useState(false)
+    const [edit, setEdit] = useState(false)
+    const [editNotes, setEditNote] = useState("")
+    const [editFolders, setEditFolder] = useState("")
+    const [oldNote, setOldNote] = useState("")
+    const [oldFolder, setOldFolder] = useState("")
+    const [folderName, setFolderName] = useState("")
+    const [prevNote, setPrevNote] = useState("")
 
       // Get notes and Folders (Needs to be refined since I am only looking at the pointer in notes)
     useEffect(() => {
         getNotes().then((notes) => {
             setNotes(notes)
-            console.log("notes: ", notes)
-            // const uniqueFolders = [...new Set(notes.map((item) => item.folder))]
-            // setFolders(uniqueFolders)
-            // console.log("folders: ", uniqueFolders)
+            //console.log("notes: ", notes)
+            //const uniqueFolders = [...new Set(notes.map((item) => item.folder))]
+            //setFolders(uniqueFolders)
+            //console.log("folders: ", uniqueFolders)
         })
     }, []);
 
@@ -35,29 +52,212 @@ const Home = () => {
     useEffect(() => {
         getFolders().then((folders) => {
             setFolders(folders)
-            console.log("folders in home: ", folders)
+            //console.log("folders in home: ", folders)
         })
     }, [])
 
-    //trying to delete (not currently functional)
+
+    //delete note
     useEffect(() => {
-        if (remove.length > 0) {
-            deleteNote(remove).then(() => {
+        console.log("Trying to delete")
+        console.log(delTarget)
+        if (remove && delTarget) {
+            console.log("calling delete")
+            deleteNote(delTarget).then(() => {
                 console.log("Removed: ", remove)
+                const newNotes = notes.filter((note) => note.id !== delTarget);
+                setNotes(newNotes);
             })
         }
+        setRemove(false)
+        setDelTarget("")
+        console.log(remove)
     }, [remove])
+
+    // edit note
+    useEffect(() => {
+        if (edit && editNotes && oldNote) {
+            editNote(oldNote, editNotes).then((result) => {
+                if (result.success){
+                    setNotes(prevNotes =>
+                        prevNotes.map(note =>
+                            note.id === oldNote ? { ...note, note: editNotes } : note
+                        )
+                    );
+                    //alert("Note Succesfully Edited!")
+                }
+                setEdit(false);
+                setEditNote("");
+                setOldNote("")
+                setSelectEditNote(false);
+                alert("Note Succesfully Edited!")
+            })
+        }
+    }, [edit, editNotes, oldNote]);
+
+    // edit folder
+    useEffect(() => {
+        if (edit && editFolders && oldFolder) {
+            // console.log("editFolders: ", editFolders)
+            // console.log("Old: ", oldFolder)
+            editFolder(oldFolder, editFolders).then((result) => {
+                if (result.success){
+                    setFolders(prevFolders =>
+                        prevFolders.map(folder =>
+                            folder.id === oldFolder ? { ...folder, name: editFolders } : folder
+                        )
+                    );
+                    //alert("Note Succesfully Edited!")
+                }
+                setFolderName(editFolders)
+                setEdit(false);
+                setEditFolder("");
+                setOldFolder("")
+                setSelectEditFolder(false);
+                alert("Folder Succesfully Edited!")
+            })
+        }
+    }, [edit, editFolders, oldFolder]);
+
+    //delete folder
+    useEffect(() => {
+        console.log("Trying to delete folder")
+        console.log(delFolderTarget)
+        if (removeFolder && delFolderTarget) {
+            console.log("calling delete")
+            deleteFolder(delFolderTarget, notes).then(() => {
+                console.log("Removed: ", remove)
+                const newFolders = folders.filter((folder) => folder.id !== delFolderTarget);
+                setFolders(newFolders);
+                setFolderName("")
+                const newNotes = notes.filter((note) => note.folder.id !== delFolderTarget);
+                setNotes(newNotes);
+            })
+        }
+        setRemoveFolder(false)
+        setDelFolderTarget("")
+        console.log(removeFolder)
+    }, [removeFolder, delFolderTarget])
+
+    
     //also trying to delete (not currently functional)
     const onClickHandler = (e) => {
         e.preventDefault();
         setRemove(true);
     }
 
+    // Sets a folder, closes edit note/folder if open
     const onSelectHandler = (folder) => {
         //alert(folder)
-        setSelectedFolder(folder)
-        console.log("selected: ", selectedFolder)
+        setSelectedFolder(folder.id)
+        setFolderName(folder.name)
+
+        setSelectEditNote(false)
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+        setPrevNote("")
+
+        setEditFolder("");
+        setOldFolder("")
+        setSelectEditFolder(false);
+        //console.log("selected: ", selectedFolder)
     }
+
+    const onDeleteHandler = (e) => {
+        console.log(e)
+        e.preventDefault();
+        console.log("delete: ", e.target.value);
+        setDelTarget(e.target.value)
+        setRemove(true)
+    };
+
+    const onDeleteFolderHandler = (e) => {
+        console.log(e)
+        e.preventDefault();
+        console.log("delete: ", e.target.value);
+        setDelFolderTarget(e.target.value)
+        setRemoveFolder(true)
+    };
+    
+
+    // edit folder handler, shows folder you want to edit
+    const onEditFolderHandler = (e) => {
+        //console.log("edit folder: ", e.id)
+        setSelectEditFolder(true)
+        setSelectEditNote(false)
+        setOldFolder(e.id)
+
+        setSelectedFolder(e.id)
+        setFolderName(e.name)
+    }
+
+    // shows edit form and sets the note id
+    const onEditNoteHandler = (e) => {
+        // console.log("edit note: ", e.target.value)
+        setSelectEditNote(true)
+        setSelectEditFolder(false)
+        setOldNote(e.target.value)
+
+        const id = e.target.value;
+        const foundNote = notes.find(note => note.id === id)
+        setPrevNote(foundNote.note);
+    }
+
+    // get rid of edit form
+    const onSelectBack = () => {
+        setSelectEditFolder(false)
+        setSelectEditNote(false)
+
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+        setPrevNote("")
+
+        setEditFolder("");
+        setOldFolder("")
+    }
+
+    // check if edit submit was clicked while folders/notes are ready 
+    const onClicked = (e) => {
+        e.preventDefault();
+
+        if ((editFolders && oldFolder) || (editNotes && oldNote)){
+            setEdit(true)
+        }
+        console.log("is edit: ", edit)
+    }
+
+    // note edit form filled
+    const onEditNote = (e) => {
+        e.preventDefault();
+        setEditNote(e.target.value)
+    }
+
+    // folder edit form filled
+    const onEditFolder = (e) => {
+        e.preventDefault();
+        setEditFolder(e.target.value)
+    }
+
+    // closes folder when viewing notes
+    // also closes edit note/folder
+    const onCloseFolderHandler = (e) => {
+        e.preventDefault();
+        setSelectedFolder();
+
+        setSelectEditNote(false);
+        setEdit(false);
+        setEditNote("");
+        setOldNote("")
+        setPrevNote("")
+
+        setEditFolder("");
+        setOldFolder("")
+        setFolderName("")
+        setSelectEditFolder(false);
+    }
+
 
     const navigate = useNavigate();
     const logoutHandler = () => {
@@ -65,19 +265,32 @@ const Home = () => {
 
         navigate("/");
     };
-    console.log("notes in home: ", notes)
+    //console.log("notes in home: ", notes)
 
     // Homelist notes Waits for a selected folder
     return (
-        <div>
-            <Nav />
-            <button onClick={logoutHandler}>Log Out</button>
-            <div className="title">
-                <h1>noteS tooL</h1>
+        <div className="homeMain">
+            <div className="mainContent">
+                <div className="titleBox">
+                    <div className="title">
+                        <h1>loot seton</h1>
+                    </div>
+                </div>
+                <Nav />
+                <div className="bigBorder">
+                    <div className="container">
+                        <HomeDropDown folders={folders} onSelect={onSelectHandler} onEdit={onEditFolderHandler} onDelete={onDeleteFolderHandler}/>
+                        <HomeListNotes notes={notes} folder={selectedFolder} folderName={folderName} buttonFunc={onDeleteHandler} onEdit={onEditNoteHandler} onCloseFolder={onCloseFolderHandler} allFolders={folders}/>
+                        <div>
+                            {selectEditFolder ? <HomeEditForm onBack={onSelectBack} onSelectF={selectEditFolder} onClick={onClicked} onChangeF={onEditFolder} folderTitle={folderName}/> : <></>}   
+                            {selectEditNote ? <HomeEditForm onBack={onSelectBack} onSelectN={selectEditNote} onClick={onClicked} onChangeN={onEditNote} noteStuff={prevNote}/> : <></>}  
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="gap" />
-            <HomeDropDown folders={folders} onSelect={onSelectHandler} />
-            <HomeListNotes notes={notes} folder={selectedFolder}/>
+            <div className="logout">            
+                <button onClick={logoutHandler}>Log Out</button>
+            </div>
         </div>
     )
 }

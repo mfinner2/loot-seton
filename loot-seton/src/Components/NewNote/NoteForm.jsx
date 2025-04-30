@@ -1,14 +1,24 @@
-const NoteForm = ({onChangeF, onChangeN, onClick}) => {
+import "./Note.css"
+
+const NoteForm = ({onChangeF, onChangeN, onChangeU, onClick}) => {
     return (
         <div>
-            <form>
-                <label >Folder Name:</label>
-                <input type="text" id="folderName" onChange={onChangeF}></input>
+            <form className="form-switch newNoteForm">
+                <label className="newNoteLabel">Folder Name</label>
                 <br />
-                <label >Note:</label>
-                <input type="text" id="noteContent" onChange={onChangeN}></input>
+                <input type="text" className="newNoteInput" id="folderName" onChange={onChangeF} maxLength={15}></input>
                 <br />
-                <button type="submit" onClick={onClick}>Create</button>
+                <label className="newNoteLabel">Note</label>
+                <br />
+                <textarea id="noteContent" className="newNoteNote" onChange={onChangeN} maxLength={100}></textarea>
+                <br />
+                <br />
+                <div className="checkboxStyle">
+                <label className="newNoteLabel">Make Private?</label>
+                <input type="checkbox" className="newNoteInput checkbox form-check-input" id="user" onChange={onChangeU}></input>
+                </div>
+                <br />
+                <button class="submitButton" type="submit" onClick={onClick}>Create</button>
             </form>
         </div>
     )

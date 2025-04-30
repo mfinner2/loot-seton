@@ -1,5 +1,18 @@
 # Change Log
 
+## 0.4.0 - 2025-04-30
+- Download the code from the Github release (or the turned in zip file)
+### Added
+-	Edit buttons and functionality to folders and notes
+-	Delete buttons and functionality to folders and notes
+-	Public and private folders
+-	Ability to create public and private folders
+-	Title and custom icon on tab
+### Changed
+-	Styling on all pages
+-	Folders now list on side instead of dropdown
+### Fixed
+-	New release, so no fixes
 
 ## 0.3.0 - 2025-04-01
 - Download the code from the Github release (or the turned in zip file)
